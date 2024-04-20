@@ -1,0 +1,11 @@
+Model Information:
+* title:	Octopus (Rigged)
+* source:	https://sketchfab.com/3d-models/octopus-rigged-0b19839c8d4b49c39f3f3fb6a4380803
+* author:	Zyleck (https://sketchfab.com/Zyleck)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Octopus (Rigged)" (https://sketchfab.com/3d-models/octopus-rigged-0b19839c8d4b49c39f3f3fb6a4380803) by Zyleck (https://sketchfab.com/Zyleck) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
