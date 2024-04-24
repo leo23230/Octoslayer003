@@ -47,6 +47,11 @@ public class PlayerCam : MonoBehaviour
     }
     public void DoZoomOut(float endValue)
     {
-        transform.DOLocalMoveZ(-endValue, 0.1f);
+        transform.DOLocalMoveZ(-endValue, 0.1f);   
+    }
+
+    public void DoCamShake(float _duration, float _strength)
+    {
+        transform.DOShakePosition(_duration, strength: _strength, vibrato: 50);
     }
 }

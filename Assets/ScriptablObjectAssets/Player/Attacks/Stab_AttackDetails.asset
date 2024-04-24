@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3285b86bd1b17449c9dbc893719892, type: 3}
   m_Name: Stab_AttackDetails
   m_EditorClassIdentifier: 
-  attackName: Slash
+  attackName: Stab
   description: Quick and effective attack.
-  animTrigger: slash
+  animTrigger: stab
   damage: 15
   speed: 1
   isLight: 0

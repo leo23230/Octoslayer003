@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3285b86bd1b17449c9dbc893719892, type: 3}
   m_Name: Spin_AttackDetails
   m_EditorClassIdentifier: 
-  attackName: Slash
-  description: Quick and effective attack.
-  animTrigger: slash
+  attackName: Spin
+  description: Special Attack.
+  animTrigger: spin
   damage: 50
   speed: 1
   isLight: 0

@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f*airMultiplier, ForceMode.Force);
     }
 
-    private void Jump()
+    public void Jump()
     {
         //reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -203,6 +203,11 @@ public class PlayerMovement : MonoBehaviour
     public void DoPlayerObjectRotate(Vector3 endValue)
     {
         playerObject.DOLocalRotate(endValue, 0.3f);
+    }
+
+    public void DoPlayerObjectTransformUp(float endValue)
+    {
+        playerObject.DOLocalMoveY(endValue, 0.3f);
     }
 
     public void DoPlayerObjectMove(Vector3 endValue)
