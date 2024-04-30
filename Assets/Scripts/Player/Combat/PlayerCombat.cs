@@ -6,8 +6,12 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("References")]
     private PlayerMovement pm;
+    [HideInInspector] public Stamina staminaComponent;
     public Animator anim;
     public PlayerCam cam;
+
+    [Header("Stats")]
+    public int maxStamina = 100;
 
     [Header("Keybinds")]
     public string primaryAttackInput = "PrimaryAttack";
@@ -21,9 +25,15 @@ public class PlayerCombat : MonoBehaviour
     public AttackDetailsSO specialAttack;
     public List<AttackDetailsSO> unlockedAttacks;
 
+    private float damage;
+    private float knockback;
+    [HideInInspector]public float staminaRequired;
+
     private void Start()
     {
         pm = GetComponent<PlayerMovement>();
+        staminaComponent = GetComponent<Stamina>();
+        staminaComponent.SetStartingStamina(maxStamina);
     }
 
     //first we want to send an event that the player is attacking
@@ -44,33 +54,74 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetButtonDown(primaryAttackInput))
         {
+            //set damage and knockback
+            damage = attack1.damage;
+            knockback = attack1.knockback;
+            staminaRequired = attack1.staminaRequired;
+
             //switch movement state
 
-            //animation
-            anim.SetTrigger(attack1.animTrigger);
+            bool staminaRequirmentMet = staminaComponent.GetStamina() >= staminaRequired;
+            if (staminaRequirmentMet)
+            {
 
-            //call event to notify enemies of an attack
-            StaticEventHandler.CallPlayerAttackEvent(attack1);
+                //animation
+                anim.SetTrigger(attack1.animTrigger);
+                //staminaComponent.SubtractStamina(staminaRequired);
+
+                //call event
+                StaticEventHandler.CallPlayerAttackEvent(attack1);
+            }
         }
         else if (Input.GetButtonDown(heavyAttackInput))
         {
-            //animation
-            anim.SetTrigger(attack2.animTrigger);
+            damage = attack2.damage;
+            knockback = attack2.knockback;
+            staminaRequired = attack2.staminaRequired;
 
-            //call event
-            StaticEventHandler.CallPlayerAttackEvent(attack2);
+            bool staminaRequirmentMet = staminaComponent.GetStamina() >= staminaRequired;
+            if (staminaRequirmentMet)
+            {
+
+                //animation
+                anim.SetTrigger(attack2.animTrigger);
+                //staminaComponent.SubtractStamina(staminaRequired);
+
+                //call event
+                StaticEventHandler.CallPlayerAttackEvent(attack2);
+            }
         }
         else if (Input.GetButtonDown(specialAttackInput))
         {
+            damage = specialAttack.damage;
+            knockback = specialAttack.knockback;
+            staminaRequired = specialAttack.staminaRequired;
+
             //switch movement state
 
-            //animation
-            anim.SetTrigger(specialAttack.animTrigger);
+            bool staminaRequirmentMet = staminaComponent.GetStamina() >= staminaRequired;
+            if (staminaRequirmentMet)
+            {
 
-            //want to give certain enemies the option to be immune to special attack stuns
-            StaticEventHandler.CallPlayerAttackEvent(specialAttack);
+                //animation
+                anim.SetTrigger(specialAttack.animTrigger);
+                //staminaComponent.SubtractStamina(staminaRequired);
+
+                //call event
+                StaticEventHandler.CallPlayerAttackEvent(specialAttack);
+            }
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            Debug.Log("Hit");
+            EnemyBehaviour enemyBehaviour = other.gameObject.GetComponent<EnemyBehaviour>();
+            enemyBehaviour.TakeDamage(damage, knockback);
+        }
     }
 
 }

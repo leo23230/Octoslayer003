@@ -15,8 +15,9 @@ MonoBehaviour:
   attackName: Stab
   description: Quick and effective attack.
   animTrigger: stab
-  damage: 15
-  speed: 1
+  damage: 20
+  knockback: 2
+  staminaRequired: 20
   isLight: 0
   isHeavy: 1
   isSpecial: 0

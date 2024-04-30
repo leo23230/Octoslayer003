@@ -100,4 +100,9 @@ public class EnemyAnimationEvents : MonoBehaviour
             }
         }
     }
+
+    public void ExitHurtState()
+    {
+        enemyBehaviour.SwitchState("Combat");
+    }
 }

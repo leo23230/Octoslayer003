@@ -15,8 +15,9 @@ MonoBehaviour:
   attackName: Slash
   description: Quick and effective attack.
   animTrigger: slash
-  damage: 5
-  speed: 1
+  damage: 10
+  knockback: 1.5
+  staminaRequired: 10
   isLight: 1
   isHeavy: 0
   isSpecial: 0

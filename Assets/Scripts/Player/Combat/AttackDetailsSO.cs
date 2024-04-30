@@ -12,7 +12,8 @@ public class AttackDetailsSO : ScriptableObject
 
     [Header("Stats")]
     public float damage;
-    public float speed;
+    public float knockback;
+    public float staminaRequired;
 
     [Header("Type")]
     public bool isLight;

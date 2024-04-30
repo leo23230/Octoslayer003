@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        
     }
 
     private void FixedUpdate()
@@ -79,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Cursor.visible = false;
         GroundCheck();
         MyInput();
         SpeedControl();

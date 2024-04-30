@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class EnemyBehaviour : MonoBehaviour
 {
     //References
     [Header("References")]
-    GameObject enemyModel;
-    Animator anim;
+    private GameObject enemyModel;
+    private Animator anim;
     public GameObject player;
+    public SkinnedMeshRenderer meshRenderer;
+    private Material[] mats;
     private Rigidbody rb;
+    private NavMeshAgent navAgent;
+    private Health healthComponent;
 
     //state machine
     public string enemyState;
@@ -19,6 +24,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     bool enteringState = true;
     bool vulnerable = false;
+    bool playerSpotted = false;
     float attackFrequency = 4f;
     Coroutine kickCoroutine;
 
@@ -35,16 +41,26 @@ public class EnemyBehaviour : MonoBehaviour
         enemyModel = transform.Find("EnemyModel").gameObject;
         anim = enemyModel.GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        SwitchState("Combat");
+        navAgent = GetComponent<NavMeshAgent>();
+        mats = meshRenderer.materials;
+
+        //Health
+        healthComponent = GetComponent<Health>();
+        healthComponent.SetStartingHealth(100);
+
+        //Start in Idle
+        SwitchState("Idle");
     }
 
     private void OnEnable()
     {
         StaticEventHandler.OnPlayerAttack += PlayerAttackReaction;
+        StaticEventHandler.OnPlayerSpotted += PlayerSpottedReaction;
     }
     private void OnDisable()
     {
         StaticEventHandler.OnPlayerAttack -= PlayerAttackReaction;
+        StaticEventHandler.OnPlayerSpotted -= PlayerSpottedReaction;
     }
 
     private void Update()
@@ -94,7 +110,8 @@ public class EnemyBehaviour : MonoBehaviour
             //runs once when state is entered
             enteringState = false;
         }
-        //waiting until persue conditions are met
+        //if player is spotted, call player spotted event to alert guards within a radius of the player
+
     }
     private void Persue()
     {
@@ -104,7 +121,15 @@ public class EnemyBehaviour : MonoBehaviour
 
             anim.SetBool("combat", false);
             anim.SetBool("run", true);
-            StopCoroutine(kickCoroutine);
+            if(kickCoroutine != null) StopCoroutine(kickCoroutine);
+            if(navAgent.isStopped) navAgent.isStopped = false;
+
+            //if player has not been spotted yet, alert other gaurds
+            if (!playerSpotted)
+            {
+                StaticEventHandler.CallPlayerSpottedEvent(player.transform.position);
+                playerSpotted = true;
+            }
 
             enteringState = false;
         }
@@ -140,7 +165,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             enteringState = false;
         }
-
+        transform.LookAt(new Vector3 (player.transform.position.x, transform.position.y, player.transform.position.z));
         if (!IsWithinRange(player, minRange, maxRange))
         {
             SwitchState("Persue");
@@ -158,9 +183,41 @@ public class EnemyBehaviour : MonoBehaviour
 
             anim.SetTrigger("hurt");
 
+            StartCoroutine(Flash(0.2f));
+
             enteringState = false;
+            //navAgent.isStopped = true;
         }
-        
+    }
+    public void TakeDamage(float _damage, float _knockback)
+    {
+        //start damage 
+        healthComponent.SubtractHealth(_damage);      
+
+        if(healthComponent.GetHealth() <= 0)
+        {
+            SwitchState("Dead");
+        }
+        else
+        {
+            SwitchState("Hurt");
+            navAgent.Warp(transform.position - transform.forward * _knockback);
+            transform.DOShakePosition(0.3f, 0.3f, 1);
+        }
+    }
+    private IEnumerator Flash(float _duration)
+    {
+        foreach (Material mat in mats)
+        {
+            mat.DOColor(Color.magenta, _duration / 2);   
+        }
+        yield return new WaitForSeconds(_duration + _duration/2);
+        foreach (Material mat in mats)
+        {
+            mat.DOColor(Color.white, _duration / 2);
+        }
+
+        yield return null;
     }
     private void Block()
     {
@@ -170,7 +227,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             //anim.SetBool("block", true);
 
-            StopCoroutine(kickCoroutine);
+            if(kickCoroutine != null) StopCoroutine(kickCoroutine);
 
             enteringState = false;
         }
@@ -188,24 +245,78 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    private IEnumerator deathFlicker()
+    {
+        foreach (Material mat in mats)
+        {
+            mat.DOColor(Color.magenta, 0.05f);
+        }
+        yield return new WaitForSeconds(0.1f);
+        foreach (Material mat in mats)
+        {
+            mat.DOColor(Color.white, 0.05f);
+        }
+        yield return new WaitForSeconds(0.1f);
+        foreach (Material mat in mats)
+        {
+            mat.DOColor(Color.magenta, 0.05f);
+        }
+        yield return new WaitForSeconds(0.1f);
+        foreach (Material mat in mats)
+        {
+            mat.DOColor(Color.white, 0.05f);
+        }
+        yield return new WaitForSeconds(0.1f);
+        foreach (Material mat in mats)
+        {
+            mat.DOColor(Color.black, 2f);
+        }
+
+        yield return null;
+    }
+
+    private void Dead()
+    {
+        if (enteringState)
+        {
+            //runs once when state is entered
+
+            anim.SetTrigger("dead");
+
+            //Disable Collider
+            Collider col = GetComponent<Collider>();
+            col.enabled = false;
+
+            StartCoroutine(deathFlicker());
+
+            enteringState = false;
+        }
+    }
+
     public void PlayerAttackReaction(PlayerAttackEventArgs eventArgs)
     {
         if (!eventArgs.attack.isSpecial)
         {
-            if(enemyState != "Persue")
+            if(IsWithinRange(player, 0.5f, 4))
             {
-                if (vulnerable)
+                if (enemyState != "Persue")
                 {
-                    //TakeDamage();
-                    anim.SetTrigger("hurt");
-                }
-                else
-                {
-                    anim.SetBool("block", true);
-                    SwitchState("Block");
+                    if (enemyState == "Combat" || enemyState == "Idle")
+                    {
+                        anim.SetBool("block", true);
+                        SwitchState("Block");
+                    }
                 }
             }
         }
+    }
+    public void PlayerSpottedReaction(PlayerSpottedEventArgs eventArgs) 
+    {
+        /*if(IsWithinRange(player, 0.5f, 30f))
+        {
+
+        }*/
+        SwitchState("Persue");
     }
 
     private IEnumerator KickRepeat()
@@ -247,6 +358,10 @@ public class EnemyBehaviour : MonoBehaviour
         else if (enemyState == "Stunned")
         {
             EnterState(Stunned);
+        }
+        else if (enemyState == "Dead")
+        {
+            EnterState(Dead);
         }
     }
 
