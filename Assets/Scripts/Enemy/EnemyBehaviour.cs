@@ -297,7 +297,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (!eventArgs.attack.isSpecial)
         {
-            if(IsWithinRange(player, 0.2f, 9))
+            if(IsWithinRange(player, 0.2f, 7))
             {
                 if (enemyState != "Persue")
                 {

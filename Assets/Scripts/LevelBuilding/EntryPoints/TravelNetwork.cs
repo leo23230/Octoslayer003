@@ -22,6 +22,7 @@ public class TravelNetwork : MonoBehaviour
 
     public void MoveToNextPoint()
     {
+        numberOfPoints = entryPoints.Count - 1;
         UIEffects.instance.FadeScreen(0.2f);
         //doing this so player doesn't teleport before the fade
         StartCoroutine(delayedMoveToNextPosition(0.2f));

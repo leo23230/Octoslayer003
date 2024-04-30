@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/NightClubScene-Leo.unity
+    guid: 5f95d4521489e6d47bf17fa1285ea439
   m_configObjects: {}
