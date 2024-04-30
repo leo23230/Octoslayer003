@@ -38,7 +38,7 @@ public class Climbing : MonoBehaviour
     private void StateMachine()
     {
         //State 1 - climbing
-        if(wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle)
+        if(wallFront && Input.GetAxisRaw("Vertical") > 0 && wallLookAngle < maxWallLookAngle)
         {
             if (!climbing && climbTimer > 0) StartClimbing();
 

@@ -297,7 +297,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (!eventArgs.attack.isSpecial)
         {
-            if(IsWithinRange(player, 0.5f, 4))
+            if(IsWithinRange(player, 0.2f, 9))
             {
                 if (enemyState != "Persue")
                 {
@@ -397,5 +397,17 @@ public class EnemyBehaviour : MonoBehaviour
         /*Vector3 target = new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z);
         Vector3 destination = transform.position + target;
         transform.position = Vector3.MoveTowards(transform.position, destination, _speed * Time.deltaTime);*/
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" && enemyState == "Combat")
+        {
+            player.GetComponent<PlayerCombat>().TakeDamage(20);
+        }
     }
 }

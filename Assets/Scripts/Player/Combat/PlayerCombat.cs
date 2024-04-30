@@ -9,6 +9,7 @@ public class PlayerCombat : MonoBehaviour
     [HideInInspector] public Stamina staminaComponent;
     public Animator anim;
     public PlayerCam cam;
+    private Health healthComponent;
 
     [Header("Stats")]
     public int maxStamina = 100;
@@ -34,6 +35,8 @@ public class PlayerCombat : MonoBehaviour
         pm = GetComponent<PlayerMovement>();
         staminaComponent = GetComponent<Stamina>();
         staminaComponent.SetStartingStamina(maxStamina);
+        healthComponent = GetComponent<Health>();
+        healthComponent.SetStartingHealth(100);
     }
 
     //first we want to send an event that the player is attacking
@@ -112,6 +115,15 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
+    }
+
+    public void TakeDamage(int _damage)
+    {
+        healthComponent.SubtractHealth(_damage);
+        if(healthComponent.GetHealth() <= 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

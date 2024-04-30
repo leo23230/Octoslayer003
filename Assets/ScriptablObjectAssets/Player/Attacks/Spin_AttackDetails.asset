@@ -15,9 +15,9 @@ MonoBehaviour:
   attackName: Spin
   description: Special Attack.
   animTrigger: spin
-  damage: 40
+  damage: 20
   knockback: 3
-  staminaRequired: 40
+  staminaRequired: 50
   isLight: 0
   isHeavy: 0
   isSpecial: 1

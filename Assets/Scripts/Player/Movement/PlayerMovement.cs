@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     bool readyToJump;
 
     [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
+    public string jumpKey = "Jump";
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(Input.GetButtonDown(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
