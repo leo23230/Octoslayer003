@@ -24,18 +24,18 @@ public class EntryPoint : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Player Detected");
+            Debug.Log("Player Entered" + gameObject.name + "Zone");
             InteractionHint.instance.DisplayHint(hint);
         }
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
-        {            
-            
+        {
+            Debug.Log("Player In " + gameObject.name + "Zone");
             if (Input.GetButtonDown("Interact"))
             {
-                network.MoveToNextPoint();
+                network.MoveToNextPoint(transform);
             }
         }
     }

@@ -46,4 +46,8 @@ public class PlayerAnimatorEvents : MonoBehaviour
     {
         playerAudio.PlaySound(playerAudio.stabSound);
     }
+    public void ResetPlayerImmunity()
+    {
+        pc.immune = false;
+    }
 }

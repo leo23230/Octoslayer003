@@ -27,6 +27,9 @@ public class Distraction : MonoBehaviour
             {
                 //Dialogue Trigger ("AWWW HECK")
                 distractionTriggered = true;
+
+                //IF THE PLAYER IS VISIBLE
+                PlayerStealth.instance.SubtractStealth(20);
             }
         }
     }

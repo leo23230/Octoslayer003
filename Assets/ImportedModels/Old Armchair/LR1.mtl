@@ -1,0 +1,56 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 12.10.2017 12:25:20
+
+newmtl wire_135110008
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.529412 0.431373 0.031373
+	Kd 0.529412 0.431373 0.031373
+	Ks 0.350000 0.350000 0.350000
+
+newmtl 08___Default
+	Ns 9.999999
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588235 0.588235 0.588235
+	Kd 0.588235 0.588235 0.588235
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka E:\Cad\Armchair chester field\end1\Chair-Low01DiffuseMap.jpg
+	map_Kd E:\Cad\Armchair chester field\end1\Chair-Low01DiffuseMap.jpg
+	map_bump Map__7_Normal_Bump.tga
+
+newmtl wire_000000000
+	Ns 39.999996
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.000000 0.000000 0.000000
+	Ks 0.066667 0.066667 0.066667
+	Ke 0.000000 0.000000 0.000000
+	map_Ka D:\Mapmy\Stoffe\AI29_05_leather_diffuse3.jpg
+	map_Kd D:\Mapmy\Stoffe\AI29_05_leather_diffuse3.jpg
+	map_bump D:\Mapmy\Stoffe\AI29_05_leather_reflect.jpg
+	bump D:\Mapmy\Stoffe\AI29_05_leather_reflect.jpg
+
+newmtl Metal_Dark_Gold
+	Ns 19.999998
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.878431 0.607843 0.317647
+	Ks 1.282353 1.147059 0.976471
+	Ke 0.000000 0.000000 0.000000
+	map_refl D:\Mapmy\00 Mie Bellissime 2011\Lakerem2.jpg

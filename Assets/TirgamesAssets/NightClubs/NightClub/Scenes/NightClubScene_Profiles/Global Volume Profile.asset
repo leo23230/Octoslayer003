@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7633475655337456325
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 0
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 0.1
+  contrast:
+    m_OverrideState: 0
+    m_Value: 0
+  colorFilter:
+    m_OverrideState: 1
+    m_Value: {r: 1.4980392, g: 0.44941163, b: 0.44941163, a: 1}
+  hueShift:
+    m_OverrideState: 0
+    m_Value: 0
+  saturation:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &-6735381410700185935
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -58,10 +86,10 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.19777505}
+    m_Value: {x: 0.99565923, y: 0.9913185, z: 1, w: 0.41248238}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.0988875}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.39974084}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +106,8 @@ MonoBehaviour:
   - {fileID: 5731917294167130105}
   - {fileID: -6735381410700185935}
   - {fileID: -1841769492850826001}
+  - {fileID: -7633475655337456325}
+  - {fileID: 6432683913419376229}
 --- !u!114 &5731917294167130105
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -99,7 +129,7 @@ MonoBehaviour:
     m_Value: 0.95
   intensity:
     m_OverrideState: 1
-    m_Value: 2.82
+    m_Value: 2.48
   scatter:
     m_OverrideState: 1
     m_Value: 0.573
@@ -123,5 +153,33 @@ MonoBehaviour:
     m_Value: {fileID: 0}
     dimension: 1
   dirtIntensity:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &6432683913419376229
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 0
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  center:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.305
+  smoothness:
+    m_OverrideState: 1
+    m_Value: 1
+  rounded:
     m_OverrideState: 0
     m_Value: 0

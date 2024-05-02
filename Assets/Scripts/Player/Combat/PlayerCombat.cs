@@ -28,6 +28,9 @@ public class PlayerCombat : MonoBehaviour
 
     private float damage;
     private float knockback;
+
+    //remember to reset in animation events
+    [HideInInspector]public bool immune;
     [HideInInspector]public float staminaRequired;
 
     private void Start()
@@ -112,6 +115,9 @@ public class PlayerCombat : MonoBehaviour
 
                 //call event
                 StaticEventHandler.CallPlayerAttackEvent(specialAttack);
+
+                //always immune during special attacks
+                immune = true;
             }
         }
 
@@ -119,10 +125,13 @@ public class PlayerCombat : MonoBehaviour
 
     public void TakeDamage(int _damage)
     {
-        healthComponent.SubtractHealth(_damage);
-        if(healthComponent.GetHealth() <= 0)
+        if (!immune)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            healthComponent.SubtractHealth(_damage);
+            if (healthComponent.GetHealth() <= 0)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            }
         }
     }
 
