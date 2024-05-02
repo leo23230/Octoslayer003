@@ -15,11 +15,6 @@ public class EntryPoint : MonoBehaviour
     public string explanation;
     public string hint;
 
-    public void ChangeStealthScore()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")

@@ -6,6 +6,10 @@ public class TravelNetwork : MonoBehaviour
 {
     [Header("Details")]
     public string networkName;
+    public int stealthScorePenalty;
+    [Tooltip("Reason for stealth score, mostly for developers.")]
+    public string explanation;
+    private bool networkUsed = false;
 
     public List<Transform> gatheredEntryPoints = new List<Transform>();
     private LinkedList<Transform> entryPoints = new LinkedList<Transform>();
@@ -44,6 +48,13 @@ public class TravelNetwork : MonoBehaviour
 
         //play audio
         if (audioSource != null) audioSource.Play();
+
+        //change player's stealth score if network is used for first time
+        if (!networkUsed)
+        {
+            PlayerStealth.instance.SubtractStealth(stealthScorePenalty);
+            networkUsed = true;
+        }
     }
 
     IEnumerator delayedMoveToNextPosition(Vector3 _nextPosition, float _waitTime)
