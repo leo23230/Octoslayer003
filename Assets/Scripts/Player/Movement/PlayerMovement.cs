@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
     public Transform playerObject;
     public Animator anim;
+    public AudioSource movementAudioSource;
 
     float horizontalInput;
     float verticalInput;
@@ -69,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        
     }
 
     private void FixedUpdate()
@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         MyInput();
         SpeedControl();
+        PlayWalkingSound();
     }
 
     private void MyInput()
@@ -215,5 +216,21 @@ public class PlayerMovement : MonoBehaviour
     public void DoPlayerObjectMove(Vector3 endValue)
     {
         playerObject.DOLocalMove(endValue, 0.3f);
+    }
+
+    public void PlayWalkingSound()
+    {
+        if((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && (grounded||wallrunning||climbing))
+        {
+            if (!movementAudioSource.isPlaying)
+            {
+                movementAudioSource.time = Random.Range(0f, movementAudioSource.clip.length);
+                movementAudioSource.Play();
+            }
+        }
+        else
+        {
+            movementAudioSource.Stop();
+        }
     }
 }

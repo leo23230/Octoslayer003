@@ -28,7 +28,7 @@ public class InteractionHint : MonoBehaviour
     {
         var controllers = Input.GetJoystickNames();
 
-        if (controllers.Length > 0)
+        if (controllers.Length <= 0)
         {
             buttonPressInstruction = "Press E to ";
         }

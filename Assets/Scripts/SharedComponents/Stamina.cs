@@ -55,7 +55,6 @@ public class Stamina : MonoBehaviour
             currentStamina = newVal;
 
             UpdateStaminaBar();
-            Debug.Log("Stamina: " + currentStamina);
 
             // Yield here
             yield return null;

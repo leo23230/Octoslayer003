@@ -205,16 +205,19 @@ public class EnemyBehaviour : MonoBehaviour
             transform.DOShakePosition(0.3f, 0.3f, 1);
         }
     }
+    Color originalColor;
     private IEnumerator Flash(float _duration)
     {
+        
         foreach (Material mat in mats)
         {
+            originalColor = mat.color;
             mat.DOColor(Color.magenta, _duration / 2);   
         }
         yield return new WaitForSeconds(_duration + _duration/2);
         foreach (Material mat in mats)
         {
-            mat.DOColor(Color.white, _duration / 2);
+            mat.DOColor(originalColor, _duration / 2);
         }
 
         yield return null;
@@ -297,7 +300,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (!eventArgs.attack.isSpecial)
         {
-            if(IsWithinRange(player, 0.2f, 9))
+            if(IsWithinRange(player, 0.2f, 7))
             {
                 if (enemyState != "Persue")
                 {
@@ -401,13 +404,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player" && enemyState == "Combat")
+        if (other.gameObject.tag == "Player" && enemyState == "Combat")
         {
             player.GetComponent<PlayerCombat>().TakeDamage(20);
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+
     }
 }

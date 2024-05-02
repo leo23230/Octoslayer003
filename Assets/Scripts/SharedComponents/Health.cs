@@ -41,10 +41,24 @@ public class Health : MonoBehaviour
         }
         else
         {
-            currentHealth -= amt;
+            StartCoroutine(barLerp(currentHealth, currentHealth - amt));
         }
-        Debug.Log("Health: " + currentHealth);
-        UpdateHealthBar();
+    }
+    private IEnumerator barLerp(float _currentStamina, float _newStamina)
+    {
+        float elapsedTime = 0;
+        float waitTime = 0.1f;
+        while (elapsedTime < waitTime)
+        {
+            float newVal = Mathf.Lerp(_currentStamina, _newStamina, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+            currentHealth = newVal;
+
+            UpdateHealthBar();
+
+            // Yield here
+            yield return null;
+        }
     }
 
 
