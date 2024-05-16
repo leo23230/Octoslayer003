@@ -43,16 +43,21 @@ public class Dashing : MonoBehaviour
         {
             Dash();
         }
+        if (dashCoolDownTimer > 0)
+            dashCoolDownTimer -= Time.deltaTime;
     }
 
     private void Dash()
     {
         if (dashCoolDownTimer > 0) return;
-        else dashCoolDownTimer -= Time.deltaTime;
+        else dashCoolDownTimer = dashCoolDown;
 
+        //set state
         pm.dashing = true;
 
+        //effects
         cam.DoFov(dashFov);
+        UIEffects.instance.DashLines();
 
         Transform forwardT;
 

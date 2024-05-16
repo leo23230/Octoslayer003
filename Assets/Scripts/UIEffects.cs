@@ -11,6 +11,10 @@ public class UIEffects : MonoBehaviour
 
     public Image blackScreen;
     public Image redScreen;
+    //speedLines
+    public GameObject speedLines;
+    private Image speedLinesImage;
+    private Animator speedLinesAnimator;
 
     private void Awake()
     {
@@ -28,9 +32,16 @@ public class UIEffects : MonoBehaviour
         //setting to active since we have them innactive during development//
         blackScreen.gameObject.SetActive(true);
         redScreen.gameObject.SetActive(true);
+        speedLines.SetActive(true);
+        speedLinesImage = speedLines.GetComponent<Image>();
+        speedLinesAnimator = speedLines.GetComponent<Animator>();
 
         blackScreen.CrossFadeAlpha(0, 0.1f, false);
         redScreen.CrossFadeAlpha(0, 0.01f, false);
+    }
+    private void Update()
+    {
+        speedLinesImage.color = new Color(speedLinesImage.color.r, speedLinesImage.color.g, speedLinesImage.color.b, 0);
     }
 
     public void FadeScreen(float _duration)
@@ -40,6 +51,18 @@ public class UIEffects : MonoBehaviour
     public void RedFlash(float _duration)
     {
         StartCoroutine(RedScreenFlash(_duration));
+    }
+    public void DashLines()
+    {
+        speedLinesAnimator.SetTrigger("dash");
+    }
+    public void LeftWallLines()
+    {
+        //set bool
+    }
+    public void RightWallLines()
+    {
+        //set bool
     }
 
     private IEnumerator FadeInOut(float _duration)
