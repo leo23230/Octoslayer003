@@ -117,7 +117,7 @@ Material:
     - _RGBMaskRedMetallic: 0
     - _RGBMaskRedMetallicSmoothness: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 1
+    - _Smoothness: 0.4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

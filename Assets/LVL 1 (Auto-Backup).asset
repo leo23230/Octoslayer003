@@ -342,6 +342,20 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
+  - id: 8
+    fields:
+    - title: Name
+      value: TootsDrinkSpilled
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
   conversations:
   - id: 1
     fields:
@@ -921,7 +935,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You're going to need his ID card to get to the next floor.
+        value: You're going to need his ID card to get to the private suite.
         type: 0
         typeString: 
       - title: Sequence
@@ -1263,15 +1277,15 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed" and (Variable["TootsAlive"]
-        == true)
+        == true) and (Variable["TootsDrinkSpilled"] == false)
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1058.3712
-        y: 986.3115
+        x: 1041.2283
+        y: 1054.883
         width: 160
         height: 30
     - id: 19
@@ -1367,15 +1381,16 @@ MonoBehaviour:
         destinationDialogueID: 77
         isConnector: 0
         priority: 2
-      conditionsString: 
+      conditionsString: Variable["TootsDrinkSpilled"] == true and (Dialog[thisID].SimStatus
+        ~= "WasDisplayed")
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1294.2576
-        y: 1144.9241
+        x: 757.5931
+        y: 986.0729
         width: 160
         height: 30
     - id: 21
@@ -1868,11 +1883,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 2
+        value: 3
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 3
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -1919,6 +1934,12 @@ MonoBehaviour:
         destinationDialogueID: 75
         isConnector: 0
         priority: 2
+      - originConversationID: 1
+        originDialogueID: 31
+        destinationConversationID: 1
+        destinationDialogueID: 20
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -1926,8 +1947,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 509.05945
-        y: 1113.431
+        x: 491.91656
+        y: 1182.0026
         width: 160
         height: 30
     - id: 32
@@ -2548,7 +2569,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 46
+        destinationConversationID: 1
+        destinationDialogueID: 87
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -3104,8 +3131,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1325.4166
-        y: 987.448
+        x: 1308.2737
+        y: 1056.0195
         width: 160
         height: 30
     - id: 57
@@ -3163,8 +3190,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1537.9166
-        y: 985.1753
+        x: 1520.7737
+        y: 1053.7468
         width: 160
         height: 30
     - id: 58
@@ -3212,8 +3239,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1776.5563
-        y: 985.1753
+        x: 1759.4133
+        y: 1053.7468
         width: 160
         height: 30
     - id: 61
@@ -3881,15 +3908,15 @@ MonoBehaviour:
         destinationDialogueID: 76
         isConnector: 0
         priority: 2
-      conditionsString: Variable["playerStealthScore"] >= 81
+      conditionsString: Variable["TootsDrinkSpilled"] == false
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 791.50684
-        y: 1001.3242
+        x: 768.7826
+        y: 1088.5005
         width: 160
         height: 30
     - id: 73
@@ -3942,16 +3969,15 @@ MonoBehaviour:
         destinationDialogueID: 76
         isConnector: 0
         priority: 2
-      conditionsString: 61 <= Variable["playerStealthScore"] and Variable["playerStealthScore"]
-        <= 80
+      conditionsString: Variable["TootsDrinkSpilled"] == false
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 846.87
-        y: 1122.4314
+        x: 771.2655
+        y: 1165.5397
         width: 160
         height: 30
     - id: 74
@@ -4004,16 +4030,15 @@ MonoBehaviour:
         destinationDialogueID: 76
         isConnector: 0
         priority: 2
-      conditionsString: 41 <= Variable["playerStealthScore"] and Variable["playerStealthScore"]
-        <= 60
+      conditionsString: Variable["TootsDrinkSpilled"] == false
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 751.7145
-        y: 1205.4761
+        x: 769.95624
+        y: 1239.5325
         width: 160
         height: 30
     - id: 75
@@ -4060,16 +4085,15 @@ MonoBehaviour:
         destinationDialogueID: 76
         isConnector: 0
         priority: 2
-      conditionsString: 1 <= Variable["playerStealthScore"] and Variable["playerStealthScore"]
-        <= 40
+      conditionsString: Variable["TootsDrinkSpilled"] == false
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 765.5553
-        y: 1281.6006
+        x: 768.87756
+        y: 1305.7107
         width: 160
         height: 30
     - id: 76
@@ -4118,8 +4142,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1166.0464
-        y: 1051.4562
+        x: 1148.9036
+        y: 1120.0277
         width: 160
         height: 30
     - id: 77
@@ -4173,8 +4197,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1529.0856
-        y: 1151.3885
+        x: 997.63635
+        y: 981.0541
         width: 160
         height: 30
     - id: 78
@@ -4222,8 +4246,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1765.233
-        y: 1142.0219
+        x: 1240.1475
+        y: 978.9601
         width: 160
         height: 30
     - id: 79
@@ -4458,12 +4482,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 4
-        type: 5
+        value: 7
+        type: 0
         typeString: 
       - title: Conversant
-        value: 5
-        type: 5
+        value: 1
+        type: 0
         typeString: 
       - title: Menu Text
         value: 
@@ -4513,12 +4537,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 4
-        type: 5
+        value: 7
+        type: 0
         typeString: 
       - title: Conversant
-        value: 5
-        type: 5
+        value: 1
+        type: 0
         typeString: 
       - title: Menu Text
         value: 
@@ -4569,12 +4593,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 4
-        type: 5
+        value: 7
+        type: 0
         typeString: 
       - title: Conversant
-        value: 5
-        type: 5
+        value: 1
+        type: 0
         typeString: 
       - title: Menu Text
         value: 
@@ -4625,12 +4649,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 4
-        type: 5
+        value: 7
+        type: 0
         typeString: 
       - title: Conversant
-        value: 5
-        type: 5
+        value: 1
+        type: 0
         typeString: 
       - title: Menu Text
         value: 
@@ -4711,19 +4735,7 @@ MonoBehaviour:
       - originConversationID: 1
         originDialogueID: 87
         destinationConversationID: 1
-        destinationDialogueID: 47
-        isConnector: 0
-        priority: 2
-      - originConversationID: 1
-        originDialogueID: 87
-        destinationConversationID: 1
-        destinationDialogueID: 51
-        isConnector: 0
-        priority: 2
-      - originConversationID: 1
-        originDialogueID: 87
-        destinationConversationID: 1
-        destinationDialogueID: 53
+        destinationDialogueID: 98
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -4733,8 +4745,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 633.5751
-        y: 2145.012
+        x: 604.5265
+        y: 2160.9885
         width: 160
         height: 30
     - id: 88
@@ -4748,12 +4760,12 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 4
-        type: 5
+        value: 9
+        type: 0
         typeString: 
       - title: Conversant
-        value: 5
-        type: 5
+        value: 1
+        type: 0
         typeString: 
       - title: Menu Text
         value: 
@@ -4774,7 +4786,19 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 88
+        destinationConversationID: 1
+        destinationDialogueID: 90
+        isConnector: 0
+        priority: 2
+      - originConversationID: 1
+        originDialogueID: 88
+        destinationConversationID: 1
+        destinationDialogueID: 100
+        isConnector: 0
+        priority: 2
       conditionsString: 1 <= Variable["playerStealthScore"] and Variable["playerStealthScore"]
         <= 40
       userScript: 
@@ -4783,8 +4807,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 959.9413
-        y: 2318.1062
+        x: 936.7023
+        y: 2316.654
         width: 160
         height: 30
     - id: 89
@@ -4828,7 +4852,7 @@ MonoBehaviour:
       - originConversationID: 1
         originDialogueID: 89
         destinationConversationID: 1
-        destinationDialogueID: 90
+        destinationDialogueID: 88
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -4838,8 +4862,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 598.28564
-        y: 2281.7952
+        x: 589.57104
+        y: 2299.2244
         width: 160
         height: 30
     - id: 90
@@ -4886,7 +4910,7 @@ MonoBehaviour:
         destinationDialogueID: 93
         isConnector: 0
         priority: 2
-      conditionsString: 
+      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed"
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -5203,7 +5227,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 96
+        destinationConversationID: 1
+        destinationDialogueID: 92
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -5218,7 +5248,7 @@ MonoBehaviour:
     - id: 97
       fields:
       - title: Title
-        value: 
+        value: VIP
         type: 0
         typeString: 
       - title: Description
@@ -5252,6 +5282,240 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 97
+        destinationConversationID: 1
+        destinationDialogueID: 99
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 602.6428
+        y: 2551.113
+        width: 160
+        height: 30
+    - id: 98
+      fields:
+      - title: Title
+        value: STEALTH 40
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 9
+        type: 0
+        typeString: 
+      - title: Conversant
+        value: 1
+        type: 0
+        typeString: 
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 98
+        destinationConversationID: 1
+        destinationDialogueID: 47
+        isConnector: 0
+        priority: 2
+      - originConversationID: 1
+        originDialogueID: 98
+        destinationConversationID: 1
+        destinationDialogueID: 51
+        isConnector: 0
+        priority: 2
+      - originConversationID: 1
+        originDialogueID: 98
+        destinationConversationID: 1
+        destinationDialogueID: 53
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 927.9877
+        y: 2159.7642
+        width: 160
+        height: 30
+    - id: 99
+      fields:
+      - title: Title
+        value: STEALTH 40
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 9
+        type: 5
+        typeString: 
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: 
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 99
+        destinationConversationID: 1
+        destinationDialogueID: 102
+        isConnector: 0
+        priority: 2
+      conditionsString: 1 <= Variable["playerStealthScore"] and Variable["playerStealthScore"]
+        <= 40
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 946.86926
+        y: 2551.9207
+        width: 160
+        height: 30
+    - id: 100
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 9
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: Heyyyy buddy, you want that drink?
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 100
+        destinationConversationID: 1
+        destinationDialogueID: 101
+        isConnector: 0
+        priority: 2
+      conditionsString: Dialog[90].SimStatus == "WasDisplayed" and (Dialog[thisID].SimStatus
+        ~= "WasDisplayed")
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1341.9308
+        y: 2450.895
+        width: 160
+        height: 30
+    - id: 101
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 9
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: No?  You let me know if you change your mind.
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
       userScript: 
@@ -5260,13 +5524,62 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 650.5732
-        y: 2475.5864
+        x: 1590.2966
+        y: 2448.6074
+        width: 160
+        height: 30
+    - id: 102
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 9
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: Psst, hey you.
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1312.8821
+        y: 2568.5146
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 226.57944, y: 1375.4512}
-    canvasZoom: 0.34425023
+    canvasScrollPosition: {x: 167.8891, y: 866.0214}
+    canvasZoom: 0.7299995
   - id: 2
     fields:
     - title: Title
@@ -5365,6 +5678,104 @@ MonoBehaviour:
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 1
+  - id: 3
+    fields:
+    - title: Title
+      value: New Conversation 3
+      type: 0
+      typeString: 
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Actor
+      value: 1
+      type: 5
+      typeString: CustomFieldType_Actor
+    - title: Conversant
+      value: 2
+      type: 5
+      typeString: CustomFieldType_Actor
+    overrideSettings:
+      useOverrides: 0
+      overrideSubtitleSettings: 0
+      showNPCSubtitlesDuringLine: 1
+      showNPCSubtitlesWithResponses: 1
+      showPCSubtitlesDuringLine: 0
+      skipPCSubtitleAfterResponseMenu: 0
+      subtitleCharsPerSecond: 30
+      minSubtitleSeconds: 2
+      continueButton: 0
+      overrideSequenceSettings: 0
+      defaultSequence: 
+      defaultPlayerSequence: 
+      defaultResponseMenuSequence: 
+      overrideInputSettings: 0
+      alwaysForceResponseMenu: 1
+      includeInvalidEntries: 0
+      responseTimeout: 0
+      emTagForOldResponses: 0
+      emTagForInvalidResponses: 0
+      cancelSubtitle:
+        key: 27
+        buttonName: 
+      cancelConversation:
+        key: 27
+        buttonName: 
+    nodeColor: 
+    dialogueEntries:
+    - id: 0
+      fields:
+      - title: Title
+        value: START
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: None()
+        type: 0
+        typeString: 
+      conversationID: 0
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: 
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 160
+        y: 30
+        width: 160
+        height: 30
+    entryGroups: []
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.73000026
   syncInfo:
     syncActors: 0
     syncItems: 0

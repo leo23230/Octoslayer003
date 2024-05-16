@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Shield
+  - NPC
+  - FxTemporaire
+  - Del
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - whatIsWall
   - whatIsGround
   - Enemy
-  - 
+  - Player
   - 
   - 
   - 

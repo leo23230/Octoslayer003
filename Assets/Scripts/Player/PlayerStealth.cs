@@ -9,6 +9,8 @@ public class PlayerStealth : MonoBehaviour
 
     private int startingStealth = 100;
     private int currentStealth = 100;
+    public bool playerIsVisible = true;
+    public bool bossIsActive = false;
 
 
     private void Awake()
@@ -33,7 +35,6 @@ public class PlayerStealth : MonoBehaviour
         currentStealth = amt;
         UpdateLuaVariable();
     }
-
     public void SubtractStealth(int amt)
     {
         if (currentStealth - amt < 0)

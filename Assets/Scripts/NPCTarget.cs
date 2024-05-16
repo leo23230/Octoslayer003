@@ -23,11 +23,12 @@ public class NPCTarget : MonoBehaviour
         {
             if (!stealthOptionUsed)
             {
-                bodyDouble.SetActive(true);
-                gameObject.SetActive(false);
+                /*bodyDouble.SetActive(true);
+                gameObject.SetActive(false);*/
+                Toots toots = GetComponent<Toots>();
+                if (!toots.IsCurrentState("DeathState")) HelperUtilities.instance.InvokeAfterSeconds(() => toots.EnterState("BathroomState"), 3);
                 stealthOptionUsed = true;
-            }
-                
+            }    
         }
     }
 

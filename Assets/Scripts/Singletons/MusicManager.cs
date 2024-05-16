@@ -11,6 +11,7 @@ public class MusicManager : MonoBehaviour
     [Header("Clips")]
     public AudioClip currentClubTrack;
     public AudioClip playerSpottedTrack0;
+    public AudioClip bossFightMusic;
     public List<AudioClip> clubTrackList = new List<AudioClip>();
 
     float maxVolume;
@@ -35,13 +36,28 @@ public class MusicManager : MonoBehaviour
             gameMusic0.Play();
             StartCoroutine(CrossFade(clubMusic, gameMusic0, 0.5f));
         }
-        else if (gameMusic0.isPlaying)
+        else if (gameMusic0.isPlaying || gameMusic1.isPlaying)
         {
-            SwitchAudioClip(clubMusic, _clip);
-            maxVolume = clubMusic.volume;
-            clubMusic.volume = 0;
-            clubMusic.Play();
-            StartCoroutine(CrossFade(gameMusic0, clubMusic, 0.5f));
+            SwitchSoundtrack(_clip);
+        }
+    }
+    public void SwitchSoundtrack(AudioClip _clip)
+    {
+        if (gameMusic0.isPlaying)
+        {
+            SwitchAudioClip(gameMusic1, _clip);
+            maxVolume = gameMusic1.volume;
+            gameMusic1.volume = 0;
+            gameMusic1.Play();
+            StartCoroutine(CrossFade(gameMusic0, gameMusic1, 0.5f));
+        }
+        else if (gameMusic1.isPlaying)
+        {
+            SwitchAudioClip(gameMusic0, _clip);
+            maxVolume = gameMusic0.volume;
+            gameMusic0.volume = 0;
+            gameMusic0.Play();
+            StartCoroutine(CrossFade(gameMusic1, gameMusic0, 0.5f));
         }
     }
 

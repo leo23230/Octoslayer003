@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using DG.Tweening;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -10,6 +13,9 @@ public class PlayerCombat : MonoBehaviour
     public Animator anim;
     public PlayerCam cam;
     private Health healthComponent;
+    public VolumeProfile volume;
+    private ColorAdjustments colorAdjustments;
+    public ItemSO freeBossKey;
 
     [Header("Stats")]
     public int maxStamina = 100;
@@ -33,6 +39,10 @@ public class PlayerCombat : MonoBehaviour
     [HideInInspector]public bool immune;
     [HideInInspector]public float staminaRequired;
 
+    //misc
+    [ColorUsage(true,true)]
+    Color newColor;
+
     private void Start()
     {
         pm = GetComponent<PlayerMovement>();
@@ -40,6 +50,10 @@ public class PlayerCombat : MonoBehaviour
         staminaComponent.SetStartingStamina(maxStamina);
         healthComponent = GetComponent<Health>();
         healthComponent.SetStartingHealth(100);
+
+        volume.TryGet(out colorAdjustments);
+        colorAdjustments.colorFilter.hdr = true;
+
     }
 
     //first we want to send an event that the player is attacking
@@ -58,6 +72,12 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
+        //DEV CHEAT MUST DELETE//
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Inventory.instance.Add(freeBossKey);
+        }
+
         if (Input.GetButtonDown(primaryAttackInput))
         {
             //set damage and knockback
@@ -76,7 +96,7 @@ public class PlayerCombat : MonoBehaviour
                 //staminaComponent.SubtractStamina(staminaRequired);
 
                 //call event
-                StaticEventHandler.CallPlayerAttackEvent(attack1);
+                if(!PlayerStealth.instance.bossIsActive) StaticEventHandler.CallPlayerAttackEvent(attack1);
             }
         }
         else if (Input.GetButtonDown(heavyAttackInput))
@@ -94,10 +114,10 @@ public class PlayerCombat : MonoBehaviour
                 //staminaComponent.SubtractStamina(staminaRequired);
 
                 //call event
-                StaticEventHandler.CallPlayerAttackEvent(attack2);
+                if (!PlayerStealth.instance.bossIsActive) StaticEventHandler.CallPlayerAttackEvent(attack2);
             }
         }
-        else if (Input.GetButtonDown(specialAttackInput))
+        else if (Input.GetButtonDown(specialAttackInput) && pm.grounded && pm.state != PlayerMovement.MovementState.grabbed)
         {
             damage = specialAttack.damage;
             knockback = specialAttack.knockback;
@@ -114,7 +134,7 @@ public class PlayerCombat : MonoBehaviour
                 //staminaComponent.SubtractStamina(staminaRequired);
 
                 //call event
-                StaticEventHandler.CallPlayerAttackEvent(specialAttack);
+                if (!PlayerStealth.instance.bossIsActive) StaticEventHandler.CallPlayerAttackEvent(specialAttack);
 
                 //always immune during special attacks
                 immune = true;
@@ -125,23 +145,37 @@ public class PlayerCombat : MonoBehaviour
 
     public void TakeDamage(int _damage)
     {
+        Debug.Log("Player Hit");
+        UIEffects.instance.RedFlash(0.25f);
         if (!immune)
         {
             healthComponent.SubtractHealth(_damage);
             if (healthComponent.GetHealth() <= 0)
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                if(UnityEngine.SceneManagement.SceneManager.GetActiveScene() == UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0)) UnityEngine.SceneManagement.SceneManager.LoadScene(0);
             }
         }
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
         {
             Debug.Log("Hit");
-            EnemyBehaviour enemyBehaviour = other.gameObject.GetComponent<EnemyBehaviour>();
-            enemyBehaviour.TakeDamage(damage, knockback);
+            EnemyBehaviour enemyBehaviour = other.GetComponent<EnemyBehaviour>();
+            if(enemyBehaviour != null) enemyBehaviour.TakeDamage(damage, knockback);
+        }
+        else if (other.CompareTag("Del"))
+        {
+            DelBossSM delBossSM = other.GetComponent<DelBossSM>();
+            if (delBossSM != null) delBossSM.TakeDamage(damage, knockback);
+        }
+        else if (other.name == "TootsBody")
+        {
+            //temporary, will be replaced with npc sate machine
+            Toots NPCStateMachine = other.GetComponent<Toots>();
+            NPCStateMachine.EnterState("DeathState");
         }
     }
 

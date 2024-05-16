@@ -79,6 +79,7 @@ public class Health : MonoBehaviour
     public void UpdateHealthBar() 
     {
         if(healthBarImage != null) healthBarImage.fillAmount = (float)currentHealth / (float)startingHealth;
+        Debug.Log("Current Health" + currentHealth);
     }
 
 }

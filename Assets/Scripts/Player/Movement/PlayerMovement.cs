@@ -7,10 +7,12 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-
+    public float walkSpeed;
     public float groundDrag;
     public float wallrunSpeed;
     public float climbSpeed;
+    public float dashSpeed;
+    public float dashSpeedChangeFactor;
 
     [Header("FightingMovement")]
     public float blockingSpeed;
@@ -47,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         walking,
         sprinting,
         wallrunning,
+        dashing,
         climbing,
         slashing,
         stabbing,
@@ -54,9 +57,11 @@ public class PlayerMovement : MonoBehaviour
         blocking,
         crounching,
         sliding,
-        air
+        air,
+        grabbed,
     }
     public bool sliding;
+    public bool dashing;
     public bool crouchin;
     public bool wallrunning;
     public bool climbing;
@@ -64,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     public bool grabbingEnemy;
     public bool stabbing;
     public bool blocking;
+    public bool grabbed;
 
     void Start()
     {
@@ -84,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         MyInput();
         SpeedControl();
+        StateHandler();
         PlayWalkingSound();
     }
 
@@ -95,11 +102,14 @@ public class PlayerMovement : MonoBehaviour
         //when to jump
         if(Input.GetButtonDown(jumpKey) && readyToJump && grounded)
         {
-            readyToJump = false;
+            if(state != MovementState.grabbed)
+            {
+                readyToJump = false;
 
-            Jump();
+                Jump();
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                Invoke(nameof(ResetJump), jumpCooldown);
+            } 
         }
     }
 
@@ -110,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleDrag()
     {
-        if (grounded)
+        if (grounded && !dashing)
             rb.drag = groundDrag;
         else
             rb.drag = 0f;
@@ -160,20 +170,30 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
     }
 
+    private float desiredMoveSpeed;
+    private float lastDesiredMoveSpeed;
+    private MovementState lastState;
+    private bool keepMomentum;
     private void StateHandler()
     {
+        if (dashing)
+        {
+            state = MovementState.dashing;
+            desiredMoveSpeed = dashSpeed;
+            speedChangeFactor = dashSpeedChangeFactor;
+        }
         //Mode - Climbing
-        if (climbing)
+        else if (climbing)
         {
             state = MovementState.climbing;
-            moveSpeed = climbSpeed;
+            desiredMoveSpeed = climbSpeed;
         }
 
         //Mode - Wallrunning
         else if (wallrunning)
         {
             state = MovementState.wallrunning;
-            moveSpeed = wallrunSpeed;
+            desiredMoveSpeed = wallrunSpeed;
         }
 
         //COMBAT//
@@ -200,7 +220,61 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.blocking;
         }
+        else if (grabbed)
+        {
+            state = MovementState.grabbed;
+            //moveSpeed = 0f;
+        }
+        else if(grounded)
+        {
+            state = MovementState.walking;
+            desiredMoveSpeed = walkSpeed;
+        }
+        else
+        {
+            state = MovementState.air;
+        }
 
+        bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
+        if (lastState == MovementState.dashing) keepMomentum = true;
+
+        if (desiredMoveSpeedHasChanged)
+        {
+            if (keepMomentum)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SmoothlyLerpMoveSpeed());
+            }
+            else
+            {
+                moveSpeed = desiredMoveSpeed;
+            }
+        }
+
+        lastDesiredMoveSpeed = desiredMoveSpeed;
+    }
+    private float speedChangeFactor;
+    private IEnumerator SmoothlyLerpMoveSpeed()
+    {
+        // smoothly lerp movementSpeed to desired value
+        float time = 0;
+        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
+        float startValue = moveSpeed;
+
+        float boostFactor = speedChangeFactor;
+
+        while (time < difference)
+        {
+            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+
+            time += Time.deltaTime * boostFactor;
+
+            yield return null;
+        }
+
+        moveSpeed = desiredMoveSpeed;
+        speedChangeFactor = 1f;
+        keepMomentum = false;
     }
 
     public void DoPlayerObjectRotate(Vector3 endValue)

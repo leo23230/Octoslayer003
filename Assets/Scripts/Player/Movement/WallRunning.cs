@@ -87,7 +87,7 @@ public class WallRunning : MonoBehaviour
                 StartWallRun();
 
             //wall jump
-            if (Input.GetKeyDown(jumpKey))
+            if (Input.GetButtonDown("Jump"))
                 WallJump();
         }
 

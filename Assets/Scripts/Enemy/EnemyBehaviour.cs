@@ -142,14 +142,18 @@ public class EnemyBehaviour : MonoBehaviour
         {
             float distanceToPlayer= Vector3.Distance(transform.position, player.transform.position);
             float averageOfRange = maxRange + minRange / 2;
-            if(!Mathf.Approximately(distanceToPlayer, averageOfRange))
+            MoveTowards(player, runSpeed);
+            /* 
+            if (!Mathf.Approximately(distanceToPlayer, averageOfRange))
             {
-                MoveTowards(player, runSpeed);
+                Debug.Log("Not in range");
+                
             }
             else
             {
                 SwitchState("Combat");
             }
+            */
         }
     }
     private void Combat()
@@ -300,7 +304,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (!eventArgs.attack.isSpecial)
         {
-            if(IsWithinRange(player, 0.2f, 7))
+            if(IsWithinRange(player, 0.2f, 6))
             {
                 if (enemyState != "Persue")
                 {
