@@ -34,7 +34,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2998
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses: []
@@ -108,7 +108,7 @@ Material:
     - _FoamSharpness: 0.89
     - _FoamSpeed: 1.63
     - _FoamStretchX: 1
-    - _FoamStretchY: 1
+    - _FoamStretchY: 1.1
     - _FoamTexture: 1
     - _Frequency: 0.08
     - _GlossMapScale: 0
@@ -119,9 +119,9 @@ Material:
     - _OcclusionStrength: 1
     - _Opaque: 0
     - _ProceduralFoam: 1
-    - _QueueOffset: 0
+    - _QueueOffset: -2
     - _ReceiveShadows: 1
-    - _RefractionAmplitude: 0.01
+    - _RefractionAmplitude: 0.0151
     - _RefractionFrequency: 10.8
     - _RefractionScale: 3
     - _RefractionSpeed: 0
@@ -139,7 +139,7 @@ Material:
     - _UvFadeY: 0.1
     - _WaterClearness: 0.569
     - _WaterDepth: 4.2
-    - _WaveAmplitude: 0.27
+    - _WaveAmplitude: 0.3
     - _WaveDirection: 0
     - _WaveFrequency: 1
     - _WaveMode: 1
@@ -155,7 +155,7 @@ Material:
     - _ColorTop: {r: 1, g: 1, b: 1, a: 0}
     - _CrestColor: {r: 1, g: 1, b: 1, a: 0.9}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FoamColor: {r: 0.9975696, g: 1, b: 0.9575471, a: 0.12941177}
+    - _FoamColor: {r: 0.9975696, g: 1, b: 0.9575471, a: 0.21568628}
     - _FoamStretch: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

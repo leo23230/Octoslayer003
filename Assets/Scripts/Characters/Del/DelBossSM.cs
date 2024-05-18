@@ -28,6 +28,7 @@ public class DelBossSM : SimpleStateMachine
     public List<SkinnedMeshRenderer> meshes = new List<SkinnedMeshRenderer>();
     public Rigidbody rb;
     private List<Material> mats = new List<Material>();
+    private List<Color> colors = new List<Color>();
     private Health healthComponent;
     public NavMeshAgent navAgent;
     public GameObject phaseTwoEffect;
@@ -57,7 +58,8 @@ public class DelBossSM : SimpleStateMachine
         {
             mats.AddRange(mesh.materials);
         }
-        Debug.Log("Mats " + mats.Count);
+        SaveMaterialColors();
+       // Debug.Log("Mats " + mats.Count);
         
     }
     protected override void Update()
@@ -455,7 +457,7 @@ public class DelBossSM : SimpleStateMachine
 
         foreach (Material mat in mats)
         {
-            originalColor = Color.white;
+            originalColor = colors[mats.IndexOf(mat)];
             mat.DOColor(Color.red, _duration / 2);
         }
         yield return new WaitForSeconds(_duration + _duration / 2);
@@ -465,6 +467,15 @@ public class DelBossSM : SimpleStateMachine
         }
 
         yield return null;
+    }
+
+    private void SaveMaterialColors()
+    {
+        foreach (Material mat in mats)
+        {
+            Color matColor = mat.color;
+            colors.Add(matColor);
+        }
     }
 
 }

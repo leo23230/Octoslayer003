@@ -138,7 +138,7 @@ Material:
     - _UvFadeY: 0.1
     - _WaterClearness: 0.062
     - _WaterDepth: 0
-    - _WaveAmplitude: 1.74
+    - _WaveAmplitude: 0.2
     - _WaveDirection: 0
     - _WaveFrequency: 2.24
     - _WaveMode: 2
@@ -149,7 +149,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 1, b: 0.7287984, a: 1}
-    - _ColorDeep: {r: 0.12130651, g: 0.41437376, b: 0.5471698, a: 1}
+    - _ColorDeep: {r: 0.023529414, g: 0.13725491, b: 0.14901961, a: 1}
     - _ColorShallow: {r: 0.3453186, g: 0.59734017, b: 0.75471693, a: 1}
     - _ColorTop: {r: 0.18867925, g: 0.7491744, b: 0.754717, a: 1}
     - _CrestColor: {r: 1, g: 1, b: 1, a: 0.9}
