@@ -14,6 +14,8 @@ public class DefinedPath : MonoBehaviour
     [Header("Editor")]
     public List<Color> pathColors = new List<Color>();
 
+    private bool stopFollowPath;
+
     private void Start()
     {
         
@@ -30,7 +32,12 @@ public class DefinedPath : MonoBehaviour
         StartCoroutine(FollowPath(waypoints));
     }
 
-    IEnumerator FollowPath(Vector3[] waypoints)
+    public void StopFollow()
+    {
+        stopFollowPath = true;
+    }
+
+IEnumerator FollowPath(Vector3[] waypoints)
     {
         transform.position = waypoints[0];
 
@@ -38,7 +45,7 @@ public class DefinedPath : MonoBehaviour
         Vector3 targetWaypoint = waypoints[targetWaypointIndex];
         transform.LookAt(targetWaypoint);
 
-        while(targetWaypointIndex < waypoints.Length-1 || isLoop)
+        while(targetWaypointIndex < waypoints.Length-1 || isLoop || !stopFollowPath)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
             if (transform.position == targetWaypoint)
@@ -50,7 +57,9 @@ public class DefinedPath : MonoBehaviour
             }
             yield return null;
         }
-        yield return null;
+        //reset bool
+        stopFollowPath = false;
+        yield break;
     }
 
     IEnumerator TurnToFace(Vector3 lookTarget)
@@ -65,6 +74,8 @@ public class DefinedPath : MonoBehaviour
             yield return null;
         }
     }
+
+
 
     private void OnDrawGizmos()
     {

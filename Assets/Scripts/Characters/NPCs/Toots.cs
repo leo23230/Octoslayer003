@@ -78,6 +78,8 @@ public class Toots : SimpleStateMachine
 
             PlayerStealth.instance.SubtractStealth(20);
 
+            definedPath.StopFollow();
+
             if(!Inventory.instance.Contains(itemOfInterest)) Inventory.instance.Add(itemOfInterest);
         }
         else if (exitingState)
