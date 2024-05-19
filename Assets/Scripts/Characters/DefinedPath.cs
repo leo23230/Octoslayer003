@@ -45,7 +45,7 @@ IEnumerator FollowPath(Vector3[] waypoints)
         Vector3 targetWaypoint = waypoints[targetWaypointIndex];
         transform.LookAt(targetWaypoint);
 
-        while(targetWaypointIndex < waypoints.Length-1 || isLoop || !stopFollowPath)
+        while(targetWaypointIndex < waypoints.Length-1 || isLoop || stopFollowPath)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
             if (transform.position == targetWaypoint)

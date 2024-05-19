@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -78,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        Cursor.visible = false;
     }
 
     private void FixedUpdate()

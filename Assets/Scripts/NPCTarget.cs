@@ -26,7 +26,7 @@ public class NPCTarget : MonoBehaviour
                 /*bodyDouble.SetActive(true);
                 gameObject.SetActive(false);*/
                 Toots toots = GetComponent<Toots>();
-                if (!toots.IsCurrentState("DeathState")) HelperUtilities.instance.InvokeAfterSeconds(() => toots.EnterState("BathroomState"), 3);
+                if (!toots.IsCurrentState("DeathState")) HelperUtilities.instance.InvokeAfterSeconds(() => toots.EnterState("BathroomState"), 5);
                 stealthOptionUsed = true;
             }    
         }
@@ -46,7 +46,7 @@ public class NPCTarget : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, player.transform.position) <= 5)
         {
-            StaticEventHandler.CallPlayerSpottedEvent(player.transform.position);
+            //StaticEventHandler.CallPlayerSpottedEvent(player.transform.position);
         }
     }
 }

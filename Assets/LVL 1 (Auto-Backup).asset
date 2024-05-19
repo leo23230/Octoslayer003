@@ -277,7 +277,131 @@ MonoBehaviour:
     spritePortrait: {fileID: 0}
     alternatePortraits: []
     spritePortraits: []
-  items: []
+  items:
+  - id: 2
+    fields:
+    - title: Name
+      value: FindAWayIn
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: Find another way into the nightclub.
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: State
+      value: active
+      type: 0
+      typeString: CustomFieldType_QuestState
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Trackable
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Track
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Display Name
+      value: Find A Way In
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Entry Count
+      value: 2
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Entry 1 State
+      value: active
+      type: 0
+      typeString: 
+    - title: Entry 1
+      value: Find a sneaky way into Slips Nightclub.
+      type: 0
+      typeString: 
+    - title: Entry 2 State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Entry 2
+      value: Find your way to the dance room.
+      type: 0
+      typeString: 
+  - id: 1
+    fields:
+    - title: Name
+      value: TootsIdCard
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: Do whatever it takes to steal Toot's ID Card.
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Success Description
+      value: You've successfully snatched the ID card.
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: CustomFieldType_QuestState
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Display Name
+      value: Steal Toots's ID Card
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Trackable
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Entry Count
+      value: 2
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Entry 1 State
+      value: active
+      type: 0
+      typeString: 
+    - title: Entry 1
+      value: Find Toots in the dance room.
+      type: 0
+      typeString: 
+    - title: Entry 2 State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Entry 2
+      value: Find a way to steal the ID card.
+      type: 0
+      typeString: 
+    - title: Track
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
   locations: []
   variables:
   - id: 1
@@ -868,7 +992,12 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed"
-      userScript: 
+      userScript: 'SetQuestState("TootsIdCard", "active");
+
+        SetQuestState("FindAWayIn",
+        "success");
+
+        SetQuestEntryState("FindAWayIn", 2, "success")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -1034,8 +1163,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1251.509
-        y: 190.00107
+        x: 1252.7394
+        y: 193.69196
         width: 160
         height: 30
     - id: 11
@@ -1259,11 +1388,11 @@ MonoBehaviour:
       - title: Title
         value: Tuna Fish
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
         value: 3
         type: 5
@@ -1275,15 +1404,15 @@ MonoBehaviour:
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: "And that's when I said: \"you can tune a piano but you can't tune-a-fish!\"\r"
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -1300,7 +1429,10 @@ MonoBehaviour:
         priority: 2
       conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed" and (Variable["TootsAlive"]
         == true) and (Variable["TootsDrinkSpilled"] == false)
-      userScript: 
+      userScript: 'SetQuestEntryState("TootsIdCard", 1, "success");
+
+        SetQuestEntryState("TootsIdCard",
+        2, "active")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -1454,7 +1586,10 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 
+      userScript: 'SetQuestEntryState("FindAWayIn", 1, "success");
+
+        SetQuestEntryState("FindAWayIn",
+        2, "active")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -4219,8 +4354,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 997.63635
-        y: 981.0541
+        x: 1000.2444
+        y: 982.7927
         width: 160
         height: 30
     - id: 78
@@ -4246,7 +4381,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You made quite the scene, but atleast you got him out of there.
+        value: Well you've made quite the scene, but atleast you got him out of there.
         type: 0
         typeString: 
       - title: Sequence
@@ -4260,7 +4395,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 78
+        destinationConversationID: 1
+        destinationDialogueID: 105
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -4268,8 +4409,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1240.1475
-        y: 978.9601
+        x: 1210.5903
+        y: 982.4374
         width: 160
         height: 30
     - id: 79
@@ -5703,9 +5844,58 @@ MonoBehaviour:
         y: 2699.2715
         width: 160
         height: 30
+    - id: 105
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: Now follow him and get that ID card.
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1405.3291
+        y: 983.1675
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1060.7526, y: 701.2375}
-    canvasZoom: 0.9802501
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.44025022
   - id: 2
     fields:
     - title: Title
