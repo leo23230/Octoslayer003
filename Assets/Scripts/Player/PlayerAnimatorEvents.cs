@@ -50,4 +50,9 @@ public class PlayerAnimatorEvents : MonoBehaviour
     {
         pc.immune = false;
     }
+
+    public void DoDamageToMarkedTargets()
+    {
+        pc.DoDamageToMarkedTargets();
+    }
 }

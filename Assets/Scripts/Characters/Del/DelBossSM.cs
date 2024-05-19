@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
 
-public class DelBossSM : SimpleStateMachine
+public class DelBossSM : SimpleStateMachine, IDamageable
 {
     [Header("Attacks")]
     public List<EnemyAttackSO> phaseOneAttacks = new List<EnemyAttackSO>();

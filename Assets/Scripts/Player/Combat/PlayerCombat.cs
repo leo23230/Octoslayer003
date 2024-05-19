@@ -34,6 +34,7 @@ public class PlayerCombat : MonoBehaviour
 
     private float damage;
     private float knockback;
+    private List<IDamageable> markedForDamage = new List<IDamageable>();
 
     //remember to reset in animation events
     [HideInInspector]public bool immune;
@@ -53,7 +54,6 @@ public class PlayerCombat : MonoBehaviour
 
         volume.TryGet(out colorAdjustments);
         colorAdjustments.colorFilter.hdr = true;
-
     }
 
     //first we want to send an event that the player is attacking
@@ -156,25 +156,27 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
-    
+
+    public void DoDamageToMarkedTargets()
+    {
+        foreach(IDamageable damageableObject in markedForDamage)
+        {
+            damageableObject.TakeDamage(damage, knockback);
+        }
+        markedForDamage.Clear();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.GetComponent<IDamageable>()!=null)
         {
-            Debug.Log("Hit");
-            EnemyBehaviour enemyBehaviour = other.GetComponent<EnemyBehaviour>();
-            if(enemyBehaviour != null) enemyBehaviour.TakeDamage(damage, knockback);
-        }
-        else if (other.CompareTag("Del"))
-        {
-            DelBossSM delBossSM = other.GetComponent<DelBossSM>();
-            if (delBossSM != null) delBossSM.TakeDamage(damage, knockback);
+            IDamageable damageableObject = other.GetComponent<IDamageable>();
+            markedForDamage.Add(damageableObject);
         }
         else if (other.name == "TootsBody")
         {
             //temporary, will be replaced with npc sate machine
-            Toots NPCStateMachine = other.GetComponent<Toots>();
+            Toots NPCStateMachine = other.transform.parent.GetComponent<Toots>();
             NPCStateMachine.EnterState("DeathState");
         }
     }

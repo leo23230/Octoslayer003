@@ -23,9 +23,12 @@ public class Climbing : MonoBehaviour
     public float sphereCastRadius;
     public float maxWallLookAngle;
     private float wallLookAngle;
+    public bool climbPossible;
+    public bool climbEngaged;
 
     private RaycastHit frontWallHit;
     private bool wallFront;
+
 
     private void Update()
     {
@@ -37,8 +40,15 @@ public class Climbing : MonoBehaviour
 
     private void StateMachine()
     {
+        //crap doodoo garbage will replace with state machine some day
+        climbPossible = wallFront && Input.GetAxisRaw("Vertical") > 0 && wallLookAngle < maxWallLookAngle;
+        pm.climbPossible = climbPossible;
+
+        //only want to set it out here once while able to climb a wall
+        if(!climbEngaged && climbPossible)climbEngaged = Input.GetButtonDown("Jump");
+
         //State 1 - climbing
-        if(wallFront && Input.GetAxisRaw("Vertical") > 0 && wallLookAngle < maxWallLookAngle)
+        if ((climbEngaged && climbPossible) || (!pm.grounded && climbPossible))
         {
             if (!climbing && climbTimer > 0) StartClimbing();
 
@@ -67,6 +77,7 @@ public class Climbing : MonoBehaviour
     private void StartClimbing()
     {
         climbing = true;
+        climbEngaged = true;
         pm.climbing = true;
 
         //camera effects
@@ -89,6 +100,7 @@ public class Climbing : MonoBehaviour
     private void StopClimbing()
     {
         climbing = false;
+        climbEngaged = false;
         pm.climbing = false;
 
         //camera effects

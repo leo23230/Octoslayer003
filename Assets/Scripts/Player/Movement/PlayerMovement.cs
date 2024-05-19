@@ -71,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
     public bool blocking;
     public bool grabbed;
 
+    public bool climbPossible;
+
     void Start()
     {
         readyToJump = true;
@@ -100,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //when to jump
-        if(Input.GetButtonDown(jumpKey) && readyToJump && grounded)
+        if(Input.GetButtonDown(jumpKey) && readyToJump && grounded && !climbPossible)
         {
             if(state != MovementState.grabbed)
             {

@@ -26,7 +26,6 @@ public static class StaticEventHandler
     {
         OnBossFightStarted?.Invoke(new BossFightStartedEventArgs() { music = _music });
     }
-
 }
 
 public class PlayerAttackEventArgs : EventArgs

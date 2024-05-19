@@ -2035,7 +2035,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.45
+        time: 0.41666666
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -4929,7 +4929,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.45
+        time: 0.41666666
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -5022,6 +5022,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.41666666
     functionName: PlaySlashSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.43333334
+    functionName: DoDamageToMarkedTargets
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
