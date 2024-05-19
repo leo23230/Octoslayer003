@@ -30,7 +30,7 @@ Material:
     RenderType: Opaque
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
-  m_LockedProperties: 
+  m_LockedProperties: _FlatRimEdgeSmoothness
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:

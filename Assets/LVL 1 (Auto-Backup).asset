@@ -1034,8 +1034,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1251.509
-        y: 190.00107
+        x: 1252.7394
+        y: 193.69196
         width: 160
         height: 30
     - id: 11
@@ -4219,8 +4219,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 997.63635
-        y: 981.0541
+        x: 1000.2444
+        y: 982.7927
         width: 160
         height: 30
     - id: 78
@@ -4246,7 +4246,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: You made quite the scene, but atleast you got him out of there.
+        value: Well you've made quite the scene, but atleast you got him out of there.
         type: 0
         typeString: 
       - title: Sequence
@@ -4260,7 +4260,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 78
+        destinationConversationID: 1
+        destinationDialogueID: 105
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -4268,8 +4274,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1240.1475
-        y: 978.9601
+        x: 1210.5903
+        y: 982.4374
         width: 160
         height: 30
     - id: 79
@@ -5703,9 +5709,58 @@ MonoBehaviour:
         y: 2699.2715
         width: 160
         height: 30
+    - id: 105
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: Now follow him and get that ID card.
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1405.3291
+        y: 983.1675
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1060.7526, y: 701.2375}
-    canvasZoom: 0.9802501
+    canvasScrollPosition: {x: 1711.9999, y: 1038.6779}
+    canvasZoom: 0.5302499
   - id: 2
     fields:
     - title: Title
