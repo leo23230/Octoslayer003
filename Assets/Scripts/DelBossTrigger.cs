@@ -17,11 +17,15 @@ public class DelBossTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerStealth.instance.bossIsActive = true;
-            door.SetActive(true);
-            musicManager.SwitchMusic(musicManager.bossFightMusic);
-            StartCoroutine(EnableBossDel());
+
         }
+    }
+    public void InitiateBossFight()
+    {
+        PlayerStealth.instance.bossIsActive = true;
+        door.SetActive(true);
+        musicManager.SwitchMusic(musicManager.bossFightMusic);
+        StartCoroutine(EnableBossDel());
     }
     IEnumerator EnableBossDel()
     {

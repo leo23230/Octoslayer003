@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 
 public class Toots : SimpleStateMachine
 {
     private DefinedPath definedPath;
     public GameObject mesh;
     public ItemSO itemOfInterest;
+    public QuestTracker questTracker;
 
     protected override void Start()
     {
         base.Start();
         EnterState("IdleState");
+        questTracker = GameObject.Find("Dialogue Manager").GetComponent<QuestTracker>();
 
         definedPath = GetComponent<DefinedPath>();
     }
@@ -113,7 +116,10 @@ public class Toots : SimpleStateMachine
                 {
                     Inventory.instance.Add(itemOfInterest);
                     InteractionHint.instance.DisableHint();
-                    itemOfInterest = null; 
+                    itemOfInterest = null;
+
+                    QuestLog.SetQuestState("TootsIdCard", QuestState.Success);
+                    if(questTracker != null) questTracker.UpdateTracker();
                 }
             }
         }
