@@ -6,6 +6,7 @@ public class NPCEvents : MonoBehaviour
 {
     public GameObject fluke;
     public DelBossTrigger delBossTrigger;
+    public ItemSO password;
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class NPCEvents : MonoBehaviour
     public void DisableFluke()
     {
         UIEffects.instance.FadeScreen(0.4f);
+        Inventory.instance.Add(password);
         StartCoroutine(DelayedDisableFluke(0.4f));
     }
     IEnumerator DelayedDisableFluke(float _duration)

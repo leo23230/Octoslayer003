@@ -417,4 +417,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     {
 
     }
+    public GameObject GetDamageableGameObject()
+    {
+        return gameObject;
+    }
 }

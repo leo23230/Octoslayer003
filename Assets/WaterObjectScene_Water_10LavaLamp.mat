@@ -138,7 +138,7 @@ Material:
     - _UvFadeY: 0.1
     - _WaterClearness: 0.444
     - _WaterDepth: 7.27
-    - _WaveAmplitude: 0.56
+    - _WaveAmplitude: 0.3
     - _WaveDirection: 0
     - _WaveFrequency: 2.43
     - _WaveMode: 2

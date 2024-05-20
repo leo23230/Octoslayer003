@@ -45,6 +45,7 @@ public class PlayerStealth : MonoBehaviour
         {
             currentStealth -= amt;
         }
+        //currentStealth = 0;
         UpdateLuaVariable();
     }
 

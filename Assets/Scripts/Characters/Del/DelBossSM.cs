@@ -477,5 +477,9 @@ public class DelBossSM : SimpleStateMachine, IDamageable
             colors.Add(matColor);
         }
     }
+    public GameObject GetDamageableGameObject()
+    {
+        return gameObject;
+    }
 
 }

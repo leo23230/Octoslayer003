@@ -454,40 +454,6 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
-  - id: 3
-    fields:
-    - title: Name
-      value: FindFluke
-      type: 0
-      typeString: 
-    - title: Pictures
-      value: '[]'
-      type: 3
-      typeString: CustomFieldType_Files
-    - title: Description
-      value: Locate Fluke in Slips Nightclub.
-      type: 0
-      typeString: 
-    - title: Success Description
-      value: 
-      type: 0
-      typeString: 
-    - title: Failure Description
-      value: 
-      type: 0
-      typeString: 
-    - title: State
-      value: unassigned
-      type: 0
-      typeString: 
-    - title: Is Item
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Display Name
-      value: Find Fluke
-      type: 0
-      typeString: 
     - title: Trackable
       value: True
       type: 2
@@ -496,6 +462,72 @@ MonoBehaviour:
       value: True
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Entry Count
+      value: 1
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Entry 1 State
+      value: active
+      type: 0
+      typeString: 
+    - title: Entry 1
+      value: Go to Del's room on the second floor.
+      type: 0
+      typeString: 
+  - id: 3
+    fields:
+    - title: Name
+      value: FindFluke
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: Locate Fluke in Slips Nightclub.
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: CustomFieldType_QuestState
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Display Name
+      value: Find Fluke
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Trackable
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Track
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Entry Count
+      value: 1
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Entry 1 State
+      value: active
+      type: 0
+      typeString: 
+    - title: Entry 1
+      value: Locate Fluke in Slips Nightclub.
+      type: 0
+      typeString: 
   locations: []
   variables:
   - id: 1
@@ -599,11 +631,11 @@ MonoBehaviour:
   - id: 9
     fields:
     - title: Name
-      value: FlukeDead
+      value: FlukeAlive
       type: 0
       typeString: 
     - title: Initial Value
-      value: False
+      value: True
       type: 2
       typeString: CustomFieldType_Boolean
     - title: Description
@@ -613,7 +645,7 @@ MonoBehaviour:
   - id: 10
     fields:
     - title: Name
-      value: TootsDead
+      value: FlukeEscaped
       type: 0
       typeString: 
     - title: Initial Value
@@ -5928,8 +5960,14 @@ MonoBehaviour:
         destinationDialogueID: 108
         isConnector: 0
         priority: 2
+      - originConversationID: 1
+        originDialogueID: 103
+        destinationConversationID: 1
+        destinationDialogueID: 126
+        isConnector: 0
+        priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetQuestState("TalkToDel", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -6189,6 +6227,10 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
+      - title: EventGuid
+        value: d2261558-3a15-4a66-a097-2e41cf86c2ab
+        type: 0
+        typeString: 
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -6220,11 +6262,11 @@ MonoBehaviour:
       - title: Title
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
         value: 11
         type: 5
@@ -6236,14 +6278,18 @@ MonoBehaviour:
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: I admire you, but  it doesn't look like you have any interest in being
+        value: I admire you, but it doesn't look like you have any interest in being
           partners, so let's get this over with.
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: EventGuid
+        value: d5f158e5-2214-4ec9-9d69-ce63c2d7f898
         type: 0
         typeString: 
       conversationID: 1
@@ -6261,8 +6307,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 957.5417
-        y: 2820.3167
+        x: 959.7435
+        y: 2818.8486
         width: 160
         height: 30
     - id: 110
@@ -6476,7 +6522,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: SetQuestState("FindFluke", "active")
+      userScript: SetQuestState("FindFluke", "active");
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -6537,8 +6583,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 315.13107
-        y: 3005.9216
+        x: 311.93106
+        y: 3133.9219
         width: 160
         height: 30
     - id: 116
@@ -6592,8 +6638,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 578.45905
-        y: 3006.1946
+        x: 575.25903
+        y: 3134.1948
         width: 160
         height: 30
     - id: 117
@@ -6647,8 +6693,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 791.9363
-        y: 3004.4424
+        x: 788.73627
+        y: 3132.4426
         width: 160
         height: 30
     - id: 118
@@ -6703,8 +6749,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1000.1946
-        y: 3004.8467
+        x: 996.99457
+        y: 3132.847
         width: 160
         height: 30
     - id: 119
@@ -6759,8 +6805,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1201.6399
-        y: 3003.0947
+        x: 1198.44
+        y: 3131.095
         width: 160
         height: 30
     - id: 120
@@ -6815,8 +6861,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1398.9447
-        y: 3001.3428
+        x: 1395.7446
+        y: 3129.343
         width: 160
         height: 30
     - id: 121
@@ -6875,8 +6921,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1583.4835
-        y: 2999.4724
+        x: 1580.2834
+        y: 3127.4727
         width: 160
         height: 30
     - id: 122
@@ -6930,8 +6976,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1776.1085
-        y: 2998.9778
+        x: 1772.9084
+        y: 3126.978
         width: 160
         height: 30
     - id: 123
@@ -7036,8 +7082,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1968.8549
-        y: 2999.237
+        x: 1965.6548
+        y: 3127.2373
         width: 160
         height: 30
     - id: 125
@@ -7083,19 +7129,301 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
+      userScript: Variable["FlukeEscaped"] = true
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 2155.6843
+        y: 3125.9058
+        width: 160
+        height: 30
+    - id: 126
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 11
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: Thanks for doing that, with him out of the way I can make some real
+          changes around here.
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 126
+        destinationConversationID: 1
+        destinationDialogueID: 127
+        isConnector: 0
+        priority: 2
+      conditionsString: (Variable["FlukeEscaped"] == true) or (Variable["FlukeAlive"]
+        == false)
       userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 2158.8843
-        y: 2997.9055
+        x: 685.9118
+        y: 2911.1467
+        width: 160
+        height: 30
+    - id: 127
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 11
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: You've really earned this supply, but I don't think you could ever
+          earn my trust.
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      - title: EventGuid
+        value: 3d63cf58-e54e-481f-86aa-60e146fdfd23
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 127
+        destinationConversationID: 1
+        destinationDialogueID: 128
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 904.277
+        y: 2911.9824
+        width: 160
+        height: 30
+    - id: 128
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 11
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: You're still working for bandits who will tell you to steal the second
+          I turn my back!
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 128
+        destinationConversationID: 1
+        destinationDialogueID: 129
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1118.9148
+        y: 2912.3708
+        width: 160
+        height: 30
+    - id: 129
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 11
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: I could easily buy you if you weren't brainwashed like...the others
+          before you.
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 129
+        destinationConversationID: 1
+        destinationDialogueID: 130
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1319.4214
+        y: 2913.7632
+        width: 160
+        height: 30
+    - id: 130
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 'I don''t know what she''s talking about, but this doesn''t look good. '
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      - title: EventGuid
+        value: 75b627d7-e525-4279-9a52-b60af12b0260
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1536.5919
+        y: 2913.7334
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1612.9464, y: 2816.582}
-    canvasZoom: 1.3899995
+    canvasScrollPosition: {x: 122.35364, y: 1905.1248}
+    canvasZoom: 0.33999813
   - id: 2
     fields:
     - title: Title

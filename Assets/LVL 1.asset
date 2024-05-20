@@ -528,6 +528,94 @@ MonoBehaviour:
       value: Locate Fluke in Slips Nightclub.
       type: 0
       typeString: 
+  - id: 5
+    fields:
+    - title: Name
+      value: FindTheSafe
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: Locate the safe on the second floor.
+      type: 0
+      typeString: 
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: 
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Trackable
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Track
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Entry Count
+      value: 1
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Entry 1 State
+      value: active
+      type: 0
+      typeString: 
+    - title: Entry 1
+      value: Locate the safe on the second floor.
+      type: 0
+      typeString: 
+  - id: 6
+    fields:
+    - title: Name
+      value: Report Back To Del
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: 
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Trackable
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Track
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
   locations: []
   variables:
   - id: 1
@@ -1434,8 +1522,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1302.3396
-        y: 537.6636
+        x: 1303.3922
+        y: 534.5057
         width: 160
         height: 30
     - id: 13
@@ -1491,7 +1579,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 1537.4473
-        y: 535.6403
+        y: 533.53503
         width: 160
         height: 30
     - id: 16
@@ -1540,7 +1628,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 1766.8196
-        y: 534.2154
+        y: 532.1101
         width: 160
         height: 30
     - id: 18
@@ -2556,8 +2644,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1753.3064
-        y: 618.68665
+        x: 1755.592
+        y: 614.1152
         width: 160
         height: 30
     - id: 41
@@ -3610,7 +3698,7 @@ MonoBehaviour:
         destinationDialogueID: 33
         isConnector: 0
         priority: 2
-      conditionsString: Variable["playerStealthScore"] >= 81
+      conditionsString: Variable["playerStealthScore"] >= 80
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -3894,8 +3982,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1625.0382
-        y: 757.888
+        x: 1617.0382
+        y: 763.60223
         width: 160
         height: 30
     - id: 67
@@ -6592,11 +6680,11 @@ MonoBehaviour:
       - title: Title
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
         value: 12
         type: 5
@@ -6608,15 +6696,15 @@ MonoBehaviour:
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: I know why you're here. Before you do it...
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -7129,7 +7217,10 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: Variable["FlukeEscaped"] = true
+      userScript: 'Variable["FlukeEscaped"] = true;
+
+        SetQuestState("FindTheSafe",
+        "active")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -7422,8 +7513,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 338.473, y: 2555.7014}
-    canvasZoom: 0.75999796
+    canvasScrollPosition: {x: 0, y: 1617.7438}
+    canvasZoom: 0.24999782
   - id: 2
     fields:
     - title: Title

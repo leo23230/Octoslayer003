@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
+    public bool DeveloperMode;
     [Header("References")]
     private PlayerMovement pm;
     [HideInInspector] public Stamina staminaComponent;
@@ -16,6 +18,8 @@ public class PlayerCombat : MonoBehaviour
     public VolumeProfile volume;
     private ColorAdjustments colorAdjustments;
     public ItemSO freeBossKey;
+    public ItemSO poison;
+    public ItemSO freePassword;
 
     [Header("Stats")]
     public int maxStamina = 100;
@@ -73,9 +77,16 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         //DEV CHEAT MUST DELETE//
-        if (Input.GetKeyDown(KeyCode.B))
+        if (DeveloperMode)
         {
-            Inventory.instance.Add(freeBossKey);
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                Inventory.instance.Add(freeBossKey);
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Inventory.instance.Add(freePassword);
+            }
         }
 
         if (Input.GetButtonDown(primaryAttackInput))
@@ -152,7 +163,8 @@ public class PlayerCombat : MonoBehaviour
             healthComponent.SubtractHealth(_damage);
             if (healthComponent.GetHealth() <= 0)
             {
-                if(UnityEngine.SceneManagement.SceneManager.GetActiveScene() == UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0)) UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                DialogueManager.ResetDatabase();
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene() == UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(0)) UnityEngine.SceneManagement.SceneManager.LoadScene(0);
             }
         }
     }
@@ -162,8 +174,17 @@ public class PlayerCombat : MonoBehaviour
         foreach(IDamageable damageableObject in markedForDamage)
         {
             damageableObject.TakeDamage(damage, knockback);
+
+            //posion
+            if (damageableObject.GetDamageableGameObject().CompareTag("Del"))
+            {
+                if (Inventory.instance.Contains(poison))
+                {
+                    StartCoroutine(DamageOverTime(damageableObject, 5, 4, 1));
+                }
+            }
         }
-        markedForDamage.Clear();
+        markedForDamage.Clear();     
     }
 
     private void OnTriggerEnter(Collider other)
@@ -179,6 +200,18 @@ public class PlayerCombat : MonoBehaviour
             Toots NPCStateMachine = other.transform.parent.GetComponent<Toots>();
             NPCStateMachine.EnterState("DeathState");
         }
+    }
+    
+    private IEnumerator DamageOverTime(IDamageable damageableObject, float damage, float duration, float frequency)
+    {
+        float timer = duration;
+        while(timer > 0)
+        {
+            yield return new WaitForSeconds(frequency);
+            damageableObject.TakeDamage(damage, knockback);
+            timer -= frequency;
+        }
+        yield break;
     }
 
 }
