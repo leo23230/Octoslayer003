@@ -20,10 +20,13 @@ public class DelBossTrigger : MonoBehaviour
 
         }
     }
-    public void InitiateBossFight()
+    public void CloseDelDoor()
+    {
+        door.SetActive(true);
+    }
+    public void StartBossFight()
     {
         PlayerStealth.instance.bossIsActive = true;
-        door.SetActive(true);
         musicManager.SwitchMusic(musicManager.bossFightMusic);
         StartCoroutine(EnableBossDel());
     }

@@ -311,7 +311,7 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: Find another way into the nightclub.
+      value: Find another way into Slips Nightclub.
       type: 0
       typeString: CustomFieldType_Text
     - title: Success Description
@@ -488,6 +488,14 @@ MonoBehaviour:
       value: Find Fluke
       type: 0
       typeString: 
+    - title: Trackable
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Track
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
   locations: []
   variables:
   - id: 1
@@ -588,6 +596,34 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
+  - id: 9
+    fields:
+    - title: Name
+      value: FlukeDead
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
+  - id: 10
+    fields:
+    - title: Name
+      value: TootsDead
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
   conversations:
   - id: 1
     fields:
@@ -677,6 +713,12 @@ MonoBehaviour:
         originDialogueID: 0
         destinationConversationID: 1
         destinationDialogueID: 6
+        isConnector: 0
+        priority: 2
+      - originConversationID: 1
+        originDialogueID: 0
+        destinationConversationID: 1
+        destinationDialogueID: 123
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -1622,7 +1664,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: Variable["TootsDrinkSpilled"] == true and (Dialog[thisID].SimStatus
-        ~= "WasDisplayed")
+        ~= "WasDisplayed") and (Variable["TootsAlive"] == true)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -4151,7 +4193,8 @@ MonoBehaviour:
         destinationDialogueID: 76
         isConnector: 0
         priority: 2
-      conditionsString: Variable["TootsDrinkSpilled"] == false
+      conditionsString: Variable["TootsDrinkSpilled"] == false and (Variable["TootsAlive"]
+        == true)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -4212,7 +4255,8 @@ MonoBehaviour:
         destinationDialogueID: 76
         isConnector: 0
         priority: 2
-      conditionsString: Variable["TootsDrinkSpilled"] == false
+      conditionsString: Variable["TootsDrinkSpilled"] == false and (Variable["TootsAlive"]
+        == true)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -4273,7 +4317,8 @@ MonoBehaviour:
         destinationDialogueID: 76
         isConnector: 0
         priority: 2
-      conditionsString: Variable["TootsDrinkSpilled"] == false
+      conditionsString: Variable["TootsDrinkSpilled"] == false and (Variable["TootsAlive"]
+        == true)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -4328,7 +4373,8 @@ MonoBehaviour:
         destinationDialogueID: 76
         isConnector: 0
         priority: 2
-      conditionsString: Variable["TootsDrinkSpilled"] == false
+      conditionsString: Variable["TootsDrinkSpilled"] == false and (Variable["TootsAlive"]
+        == true)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -5938,7 +5984,8 @@ MonoBehaviour:
         destinationDialogueID: 107
         isConnector: 0
         priority: 2
-      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed"
+      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed" and (Variable["playerStealthScore"]
+        >= 60)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -6043,7 +6090,8 @@ MonoBehaviour:
         destinationDialogueID: 107
         isConnector: 0
         priority: 2
-      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed"
+      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed" and (Variable["playerStealthScore"]
+        >= 20) and (Variable["playerStealthScore"] < 60)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -6155,7 +6203,8 @@ MonoBehaviour:
         destinationDialogueID: 109
         isConnector: 0
         priority: 2
-      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed"
+      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed" and (Variable["playerStealthScore"]
+        < 20)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -6212,8 +6261,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 958.5392
-        y: 2821.3142
+        x: 957.5417
+        y: 2820.3167
         width: 160
         height: 30
     - id: 110
@@ -6239,7 +6288,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: He has a, certain, reputation. My partners would be displeased if
+        value: He has a... certain reputation. My partners would be displeased if
           we were working together, and I don't quite trust you myself just yet.
         type: 0
         typeString: 
@@ -6407,11 +6456,15 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: ' Come back when you''ve dealt with him.'
+        value: Come back when you've dealt with him.
         type: 0
         typeString: 
       - title: Sequence
         value: 
+        type: 0
+        typeString: 
+      - title: EventGuid
+        value: e0babb13-2ee8-4d58-b55b-ea55aa9b73b2
         type: 0
         typeString: 
       conversationID: 1
@@ -6423,7 +6476,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 
+      userScript: SetQuestState("FindFluke", "active")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -6532,8 +6585,8 @@ MonoBehaviour:
         destinationDialogueID: 117
         isConnector: 0
         priority: 2
-      conditionsString: 
-      userScript: 
+      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed"
+      userScript: SetQuestState("FindFluke", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -6609,11 +6662,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 12
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 12
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -6650,7 +6703,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 998.94446
+        x: 1000.1946
         y: 3004.8467
         width: 160
         height: 30
@@ -6721,11 +6774,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 12
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 12
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -6771,6 +6824,66 @@ MonoBehaviour:
       - title: Title
         value: 
         type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 12
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: When she does, you'll want what I'm about to give you. Let me go,
+          and it's yours. I'll disappear, and you can tell her I'm dead.
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Response Menu Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 121
+        destinationConversationID: 1
+        destinationDialogueID: 122
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1583.4835
+        y: 2999.4724
+        width: 160
+        height: 30
+    - id: 122
+      fields:
+      - title: Title
+        value: 
+        type: 0
         typeString: 
       - title: Description
         value: 
@@ -6785,12 +6898,66 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
+        value: .....
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 122
+        destinationConversationID: 1
+        destinationDialogueID: 124
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1776.1085
+        y: 2998.9778
+        width: 160
+        height: 30
+    - id: 123
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
         value: 
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: When she does, you'll want what I'm about to give you. Let me go,
-          and it's yours. I'll disappear, and you can tell her I'm dead.
+        value: 
         type: 0
         typeString: 
       - title: Sequence
@@ -6812,13 +6979,123 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1583.4835
-        y: 2999.4724
+        x: 83.32207
+        y: 217.52316
+        width: 160
+        height: 30
+    - id: 124
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 12
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '*Phew*...Upstairs there''s a safe in the VIP suite, the password
+          is T00tssucks!!, in there you''ll find something useful. Now, I''ve gotta
+          bounce. Godspeed little fella!'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 124
+        destinationConversationID: 1
+        destinationDialogueID: 125
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1968.8549
+        y: 2999.237
+        width: 160
+        height: 30
+    - id: 125
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 12
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: EventGuid
+        value: 9f3b4221-1bba-4f6e-b138-12d9fc05ef1c
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 2158.8843
+        y: 2997.9055
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1240.9083, y: 2579.2434}
-    canvasZoom: 0.86199945
+    canvasScrollPosition: {x: 1612.9464, y: 2816.582}
+    canvasZoom: 1.3899995
   - id: 2
     fields:
     - title: Title

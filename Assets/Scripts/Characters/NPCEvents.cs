@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCEvents : MonoBehaviour
 {
     public GameObject fluke;
+    public DelBossTrigger delBossTrigger;
 
     private void Start()
     {
@@ -20,12 +21,20 @@ public class NPCEvents : MonoBehaviour
     public void DisableFluke()
     {
         UIEffects.instance.FadeScreen(0.4f);
-        DelayedDisableFluke(0.4f);
+        StartCoroutine(DelayedDisableFluke(0.4f));
     }
     IEnumerator DelayedDisableFluke(float _duration)
     {
         yield return new WaitForSeconds(_duration);
         fluke.SetActive(false);
         yield break;
+    }
+    public void StartDelBossFight()
+    {
+        delBossTrigger.StartBossFight();
+    }
+    public void CloseDelDoor()
+    {
+        delBossTrigger.CloseDelDoor();
     }
 }
