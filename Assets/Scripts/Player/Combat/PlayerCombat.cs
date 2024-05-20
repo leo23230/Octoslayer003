@@ -180,7 +180,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (Inventory.instance.Contains(poison))
                 {
-                    StartCoroutine(DamageOverTime(damageableObject, 5, 4, 1));
+                    StartCoroutine(DamageOverTime(damageableObject, 5, 3, 1));
                 }
             }
         }
@@ -198,6 +198,11 @@ public class PlayerCombat : MonoBehaviour
         {
             //temporary, will be replaced with npc sate machine
             Toots NPCStateMachine = other.transform.parent.GetComponent<Toots>();
+            NPCStateMachine.EnterState("DeathState");
+        }
+        else if (other.name == "FlukeBody")
+        {
+            Fluke NPCStateMachine = other.transform.parent.GetComponent<Fluke>();
             NPCStateMachine.EnterState("DeathState");
         }
     }

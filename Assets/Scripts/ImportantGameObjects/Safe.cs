@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PixelCrushers.DialogueSystem;
 
 public class Safe : MonoBehaviour
 {
@@ -8,12 +9,17 @@ public class Safe : MonoBehaviour
     public GameObject closedSafe;
     public ItemSO password;
     public ItemSO poison;
+    public QuestTracker questTracker;
 
     public void OpenSafeGivePoison()
     {
         closedSafe.SetActive(false);
         openSafe.SetActive(true);
         Inventory.instance.Add(poison);
+
+        QuestLog.SetQuestState("FindTheSafe", QuestState.Success);
+        QuestLog.SetQuestState("BackToDel", QuestState.Active);
+        if (questTracker != null) questTracker.UpdateTracker();
     }
 
     private void OnTriggerEnter(Collider other)

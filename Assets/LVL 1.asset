@@ -299,6 +299,28 @@ MonoBehaviour:
     spritePortrait: {fileID: 0}
     alternatePortraits: []
     spritePortraits: []
+  - id: 13
+    fields:
+    - title: Name
+      value: Bystander
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
   items:
   - id: 2
     fields:
@@ -578,12 +600,16 @@ MonoBehaviour:
       value: Locate the safe on the second floor.
       type: 0
       typeString: 
+    - title: Display Name
+      value: Find The Safe
+      type: 0
+      typeString: 
   - id: 6
     fields:
     - title: Name
-      value: Report Back To Del
+      value: BackToDel
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Pictures
       value: '[]'
       type: 3
@@ -591,19 +617,19 @@ MonoBehaviour:
     - title: Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Success Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Failure Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: State
       value: unassigned
       type: 0
-      typeString: 
+      typeString: CustomFieldType_QuestState
     - title: Is Item
       value: False
       type: 2
@@ -616,6 +642,22 @@ MonoBehaviour:
       value: True
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Display Name
+      value: Report Back to Del
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Entry Count
+      value: 1
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Entry 1 State
+      value: active
+      type: 0
+      typeString: 
+    - title: Entry 1
+      value: You now have WHALE POISON if things go south.
+      type: 0
+      typeString: 
   locations: []
   variables:
   - id: 1
@@ -835,12 +877,6 @@ MonoBehaviour:
         destinationDialogueID: 6
         isConnector: 0
         priority: 2
-      - originConversationID: 1
-        originDialogueID: 0
-        destinationConversationID: 1
-        destinationDialogueID: 123
-        isConnector: 0
-        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -848,8 +884,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 83.32207
-        y: 167.52316
+        x: 80.24513
+        y: 164.44626
         width: 160
         height: 30
     - id: 1
@@ -6096,6 +6132,10 @@ MonoBehaviour:
         value: 
         type: 0
         typeString: 
+      - title: EventGuid
+        value: d834c14f-1018-48e7-b0cf-14cb9e7dd1de
+        type: 0
+        typeString: 
       conversationID: 1
       isRoot: 0
       isGroup: 0
@@ -6200,6 +6240,10 @@ MonoBehaviour:
         typeString: 
       - title: Sequence
         value: 
+        type: 0
+        typeString: 
+      - title: EventGuid
+        value: 89f9f2dc-e879-401c-b6ba-1b55216fe8b5
         type: 0
         typeString: 
       conversationID: 1
@@ -6719,7 +6763,8 @@ MonoBehaviour:
         destinationDialogueID: 117
         isConnector: 0
         priority: 2
-      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed"
+      conditionsString: Dialog[thisID].SimStatus ~= "WasDisplayed" and (Variable["FlukeAlive"]
+        == true)
       userScript: SetQuestState("FindFluke", "success")
       onExecute:
         m_PersistentCalls:
@@ -7068,55 +7113,6 @@ MonoBehaviour:
         y: 3126.978
         width: 160
         height: 30
-    - id: 123
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: 
-      - title: Description
-        value: 
-        type: 0
-        typeString: 
-      - title: Actor
-        value: 2
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Dialogue Text
-        value: 
-        type: 0
-        typeString: 
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: 
-      conversationID: 1
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 83.32207
-        y: 217.52316
-        width: 160
-        height: 30
     - id: 124
       fields:
       - title: Title
@@ -7277,7 +7273,7 @@ MonoBehaviour:
         priority: 2
       conditionsString: (Variable["FlukeEscaped"] == true) or (Variable["FlukeAlive"]
         == false)
-      userScript: 
+      userScript: SetQuestState("BackToDel", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -7512,9 +7508,58 @@ MonoBehaviour:
         y: 2913.7334
         width: 160
         height: 30
+    - id: 131
+      fields:
+      - title: Title
+        value: Gethim
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 13
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: Get him! The squishy red one over there! He's gonna kill us all!!!
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 2377.4246
+        y: 1493.9768
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1617.7438}
-    canvasZoom: 0.24999782
+    canvasScrollPosition: {x: 2057.563, y: 1258.0286}
+    canvasZoom: 0.7299999
   - id: 2
     fields:
     - title: Title

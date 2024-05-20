@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 
 public class DelBossSM : SimpleStateMachine, IDamageable
 {

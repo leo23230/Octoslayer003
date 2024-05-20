@@ -39,4 +39,8 @@ public class NPCEvents : MonoBehaviour
     {
         delBossTrigger.CloseDelDoor();
     }
+    public void CallGuards()
+    {
+        StaticEventHandler.CallPlayerSpottedEvent(transform.position);
+    }
 }

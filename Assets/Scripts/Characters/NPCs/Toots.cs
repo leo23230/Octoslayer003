@@ -79,8 +79,6 @@ public class Toots : SimpleStateMachine
             mesh.GetComponent<MeshRenderer>().material.DOColor(Color.black, 0.5f);
             enteringState = false;
 
-            PlayerStealth.instance.SubtractStealth(40);
-
             definedPath.StopFollow();
 
             //Handle Dialogue
@@ -89,8 +87,22 @@ public class Toots : SimpleStateMachine
                 DialogueManager.StopConversation();
             }
             DialogueLua.SetVariable("TootsAlive", false);
+            QuestLog.SetQuestState("TootsIdCard", QuestState.Success);
+            if (!PlayerStealth.instance.inKillZone)
+            {
+                DialogueManager.StartConversation("LVL 1", null, null, 131);
+                StaticEventHandler.CallPlayerSpottedEvent(transform.position);
+                PlayerStealth.instance.SubtractStealth(100);
+            }
+            else
+            {
+                PlayerStealth.instance.SubtractStealth(40);
+            }
+
+            if (questTracker != null) questTracker.UpdateTracker();
 
             if (!Inventory.instance.Contains(itemOfInterest)) Inventory.instance.Add(itemOfInterest);
+            InteractionHint.instance.DisableHint();
         }
         else if (exitingState)
         {

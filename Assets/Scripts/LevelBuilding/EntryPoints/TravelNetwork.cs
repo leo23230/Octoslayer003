@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PixelCrushers.DialogueSystem;
 
 public class TravelNetwork : MonoBehaviour
 {
@@ -17,17 +18,29 @@ public class TravelNetwork : MonoBehaviour
     private GameObject player;
     private AudioSource audioSource;
 
+    public QuestTracker questTracker;
+
     private void Start()
     {
         player = GameObject.Find("Player");
         CollectGatheredNodesIntoLinkedList();
         Debug.Log(entryPoints.Count);
         audioSource = GetComponent<AudioSource>();
+        questTracker = GameObject.Find("Dialogue Manager").GetComponent<QuestTracker>();
+
         //entryPoints = new List<Transform>(transform.GetComponentsInChildren<Transform>());
     }
 
     public void MoveToNextPoint(Transform _transform)
     {
+        //GARBAGE CODE WILL REPLACE
+        if (networkName == "HVAC")
+        {
+            QuestLog.SetQuestState("FindAWayIn", QuestState.Success);
+            if (questTracker != null) questTracker.UpdateTracker();
+        }
+
+
         //Using Linked List to make sure each node in the network leads to the next
         LinkedListNode<Transform> currentNode = entryPoints.Find(_transform);
         Debug.Log("Current Position: " + currentNode.Value.position);

@@ -11,6 +11,7 @@ public class PlayerStealth : MonoBehaviour
     private int currentStealth = 100;
     public bool playerIsVisible = true;
     public bool bossIsActive = false;
+    public bool inKillZone = false;
 
 
     private void Awake()

@@ -63,6 +63,9 @@ public class Fluke : SimpleStateMachine
                 DialogueManager.StopConversation();
             }
             DialogueLua.SetVariable("FlukeAlive", false);
+            DialogueLua.SetVariable("FlukeEscaped", true);
+            QuestLog.SetQuestState("FindFluke", QuestState.Success);
+            if (questTracker != null) questTracker.UpdateTracker();
         }
         else if (exitingState)
         {
